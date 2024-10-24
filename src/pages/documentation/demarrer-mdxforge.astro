@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { siteConfig } from '../../config/siteconfig';
+---
+
+<Layout title="Bien démarrer avec MDXForge">
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-5xl font-bold text-center mb-12 text-main-color">Bien démarrer avec MDXForge</h1>
+    
+    <p class="text-xl text-center mb-16">
+      Découvrez comment installer, configurer et déployer votre site MDXForge en quelques étapes simples.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+      <div class="bg-main-color-light p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-6 text-main-color">Installation</h2>
+        <ol class="list-decimal list-inside space-y-4">
+          <li>Clonez le repository : <code class="bg-white px-2 py-1 rounded">git clone https://github.com/benchambolle/mdxforge-starter.git</code></li>
+          <li>Naviguez dans le dossier : <code class="bg-white px-2 py-1 rounded">cd mdxforge</code></li>
+          <li>Installez les dépendances : <code class="bg-white px-2 py-1 rounded">npm install</code></li>
+          <li>Lancez le serveur de développement : <code class="bg-white px-2 py-1 rounded">npm run dev</code></li>
+        </ol>
+      </div>
+      <div class="bg-main-color-light p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-6 text-main-color">Configuration</h2>
+        <p class="mb-4">Personnalisez votre site en modifiant les fichiers de configuration :</p>
+        <ul class="list-disc list-inside space-y-2">
+          <li><code class="bg-white px-2 py-1 rounded">src/config/siteconfig.ts</code> : Informations générales du site</li>
+          <li><code class="bg-white px-2 py-1 rounded">src/config/header-footer.ts</code> : Liens de navigation et réseaux sociaux</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bg-main-color-light p-8 rounded-lg shadow-lg mb-24">
+      <h2 class="text-3xl font-semibold mb-6 text-main-color">Personnalisation</h2>
+      <div class="space-y-4">
+        <p><strong>Logo :</strong> Placez votre logo dans le dossier <code class="bg-white px-2 py-1 rounded">public/</code> et mettez à jour le chemin dans <code class="bg-white px-2 py-1 rounded">siteconfig.ts</code>.</p>
+        <p><strong>Avatar de l'auteur :</strong> Ajoutez votre avatar dans <code class="bg-white px-2 py-1 rounded">public/</code> et mettez à jour le chemin dans la section <code class="bg-white px-2 py-1 rounded">author</code> de <code class="bg-white px-2 py-1 rounded">siteconfig.ts</code>.</p>
+        <p><strong>Couleurs et polices :</strong> Modifiez les variables dans <code class="bg-white px-2 py-1 rounded">siteconfig.ts</code> pour personnaliser l'apparence de votre site.</p>
+      </div>
+    </div>
+
+    <div class="bg-main-color-light p-8 rounded-lg shadow-lg mb-24">
+      <h2 class="text-3xl font-semibold mb-6 text-main-color">Création de contenu</h2>
+      <p class="mb-4">Ajoutez vos articles de blog dans le dossier <code class="bg-white px-2 py-1 rounded">src/content/blog/</code> en utilisant le format MDX.</p>
+      <p>Exemple de frontmatter pour un article :</p>
+      <pre class="bg-white p-4 rounded-lg mt-4 overflow-x-auto">
+        <code>
+---
+title: 'Comment contribuer à MDXForge'
+description: "Guide pour contribuer au projet open-source MDXForge et participer à son développement."
+pubDate: 2024-10-14
+heroImage: '/MDXForge-og.jpg'
+tags: ['MDXForge', 'Open Source', 'Contribution', 'Développement']
+---
+
+# Contenu de l'article en Markdown
+        </code>
+      </pre>
+    </div>
+
+    <div class="text-center">
+      <h2 class="text-3xl font-semibold mb-8 text-main-color">Déploiement</h2>
+      <p class="mb-8">
+        Une fois votre site prêt, vous pouvez le déployer sur diverses plateformes comme Netlify, Vercel, ou GitHub Pages.
+      </p>
+      <p class="mb-4">Pour construire votre site pour la production :</p>
+      <code class="bg-main-color-light px-4 py-2 rounded-lg">npm run build</code>
+      <p class="mt-8">
+        Consultez la <a href="https://docs.astro.build/en/guides/deploy/" class="text-main-color hover:underline">documentation Astro sur le déploiement</a> pour plus d'informations.
+      </p>
+    </div>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 10%, white);
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+      Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+</style>

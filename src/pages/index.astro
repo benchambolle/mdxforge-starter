@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { siteConfig } from '../config/siteconfig';
 import { getCollection } from 'astro:content';
+import NewsletterImg from '../components/NewsletterImg.astro';
 
 // Récupérer les 3 derniers articles du blog
 const latestPosts = (await getCollection('blog'))
@@ -11,7 +12,7 @@ const latestPosts = (await getCollection('blog'))
 
 <Layout title="Accueil | MDXForge">
 	<main class="container mx-auto px-4 py-16">
-		<h1 class="text-5xl font-bold text-center mb-12 text-gradient">Bienvenue sur votre tout nouveau MDXForge !</h1>
+		<h1 class="text-5xl font-bold text-center mb-12 text-main-color">Bienvenue sur votre tout nouveau MDXForge !</h1>
 		
 		<p class="text-xl text-center mb-12">
 			Félicitations ! Vous venez de lancer votre site MDXForge. C'est le moment de commencer à créer quelque chose d'extraordinaire !
@@ -40,7 +41,7 @@ const latestPosts = (await getCollection('blog'))
 			</div>
 		</div>
 
-		<h2 class="text-3xl font-semibold text-center mb-12">Ressources utiles</h2>
+		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Ressources utiles</h2>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
 			{[
 				{ title: 'Documentation Astro', url: 'https://docs.astro.build', icon: 'book' },
@@ -73,7 +74,7 @@ const latestPosts = (await getCollection('blog'))
 			))}
 		</div>
 
-		<h2 class="text-3xl font-semibold text-center mb-12">Derniers articles du blog</h2>
+		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Derniers articles du blog</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
 			{latestPosts.map((post) => (
 				<a href={`/blog/${post.slug}/`} class="bg-main-color-light rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
@@ -95,7 +96,7 @@ const latestPosts = (await getCollection('blog'))
 			))}
 		</div>
 
-		<h2 class="text-3xl font-semibold text-center mb-12">FAQ</h2>
+		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">FAQ</h2>
 		<div class="space-y-6 mb-24">
 			{[
 				{ question: "Qu'est-ce que MDXForge ?", answer: "MDXForge est un template Astro conçu pour simplifier la création de sites web statiques et de blogs, en utilisant MDX pour le contenu." },
@@ -125,20 +126,28 @@ const latestPosts = (await getCollection('blog'))
 				</div>
 			))}
 		</div>
+
+		<!-- Ajout du composant NewsletterImg ici -->
+		<NewsletterImg 
+			webhook="https://votre-webhook-personnalise.com"
+			image="newsletter.webp"
+			alt="Description de l'image"
+		/>
 	</main>
 </Layout>
 
 <script>
-	document.querySelectorAll('[id^="accordion-button-"]').forEach((button) => {
-		button.addEventListener('click', () => {
-			const content = document.getElementById(button.getAttribute('aria-controls'));
-			const expanded = button.getAttribute('aria-expanded') === 'true' || false;
-			
-			button.setAttribute('aria-expanded', (!expanded).toString());
-			content.classList.toggle('hidden');
-			button.querySelector('svg').classList.toggle('rotate-180');
-		});
-	});
+	const button = document.querySelector('button[aria-controls]');
+	if (button) {
+		const controlsId = button.getAttribute('aria-controls');
+		if (controlsId) {
+			const content = document.getElementById(controlsId);
+			if (content) {
+				content.classList.toggle('hidden');
+			}
+			button.querySelector('svg')?.classList.toggle('rotate-180');
+		}
+	}
 </script>
 
 <style define:vars={{ mainColor: siteConfig.mainColor }}>
@@ -177,3 +186,5 @@ const latestPosts = (await getCollection('blog'))
 		to { opacity: 1; transform: translateY(0); }
 	}
 </style>
+
+

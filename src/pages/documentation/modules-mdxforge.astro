@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { siteConfig } from '../../config/siteconfig';
+import Newsletter from '../../components/Newsletter.astro';
+import NewsletterImg from '../../components/NewsletterImg.astro';
+import ContactForm from '../../components/ContactForm.astro';
+---
+
+<Layout title="Modules MDXForge">
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-5xl font-bold text-center mb-12 text-main-color">Modules MDXForge</h1>
+    
+    <div class="prose prose-lg mx-auto">
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Newsletter</h2>
+      <p>Le module Newsletter permet d'ajouter un formulaire d'inscription à votre newsletter. Il inclut des champs pour le prénom, l'email, et une case RGPD obligatoire. Vous pouvez configurer un webhook pour recevoir les inscriptions.</p>
+      <pre class="bg-gray-100 p-4 rounded-lg">
+        <code>
+import Newsletter from '../../components/Newsletter.astro';
+
+<Newsletter webhook="https://votre-webhook.com" />
+        </code>
+      </pre>
+
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Newsletter avec Image</h2>
+      <p>Ce module est similaire au module Newsletter, mais inclut une image à gauche du formulaire. Idéal pour un design plus visuel.</p>
+      <pre class="bg-gray-100 p-4 rounded-lg">
+        <code>
+import NewsletterImg from '../../components/NewsletterImg.astro';
+
+<NewsletterImg 
+  webhook="https://votre-webhook.com"
+  image="/newsletter.jpg"
+  alt="Description de l'image"
+/>
+        </code>
+      </pre>
+
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Formulaire de Contact</h2>
+      <p>Le module Formulaire de Contact permet aux utilisateurs de vous envoyer des messages directement depuis votre site. Il inclut des champs pour le nom, le prénom, l'entreprise, le téléphone, l'email, un menu déroulant pour le sujet, et un champ de message.</p>
+      <pre class="bg-gray-100 p-4 rounded-lg">
+        <code>
+import ContactForm from '../../components/ContactForm.astro';
+
+<ContactForm 
+  webhook="https://votre-webhook.com"
+  subjects={['Demande d\'information', 'Support technique', 'Partenariat', 'Autre']}
+/>
+        </code>
+      </pre>
+    </div>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+</style>

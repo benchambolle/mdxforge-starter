@@ -1,0 +1,80 @@
+---
+import { siteConfig } from '../config/siteconfig';
+
+interface Props {
+  webhook?: string;
+  image: string;
+  alt: string;
+}
+
+const { webhook = 'https://votre-webhook-par-defaut.com', image, alt } = Astro.props;
+---
+
+<div class="newsletter-card bg-main-color-light rounded-lg p-8 mt-12 mb-8 flex flex-col md:flex-row items-center">
+  <div class="md:w-1/3 mb-6 md:mb-0 md:mr-8">
+    <img src={image} alt={alt} class="w-full h-auto max-h-64 object-cover rounded-lg shadow-md">
+  </div>
+  <div class="md:w-2/3">
+    <h3 class="text-2xl font-semibold text-main-color mb-4">Abonnez-vous à notre newsletter</h3>
+    <p class="text-gray-700 mb-6">Restez informé de nos dernières actualités et articles.</p>
+    <form id="newsletter-form" class="space-y-4">
+      <div>
+        <label for="firstname" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
+        <input type="text" id="firstname" name="firstname" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
+      </div>
+      <div class="flex items-start">
+        <input type="checkbox" id="gdpr" name="gdpr" required class="mt-1 mr-2">
+        <label for="gdpr" class="text-sm text-gray-700">J'accepte de recevoir des emails et je reconnais avoir lu la <a href="/privacy" class="text-main-color hover:underline">politique de confidentialité</a>.</label>
+      </div>
+      <button type="submit" class="w-full bg-main-color text-white font-bold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity">S'abonner</button>
+    </form>
+  </div>
+</div>
+
+<script define:vars={{ webhook }} is:inline>
+  const form = document.getElementById('newsletter-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch(webhook, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert('Merci pour votre inscription !');
+        form.reset();
+      } else {
+        throw new Error('Erreur lors de l\'inscription');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert('Une erreur est survenue. Veuillez réessayer plus tard.');
+    }
+  });
+</script>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 5%, white);
+  }
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .focus\:ring-main-color:focus {
+    --tw-ring-color: var(--mainColor);
+  }
+  .bg-main-color {
+    background-color: var(--mainColor);
+  }
+</style>

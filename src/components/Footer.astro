@@ -1,6 +1,18 @@
 ---
 import { footerLinks, socialLinks } from '../config/header-footer';
 import { siteConfig } from '../config/siteconfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faFacebook, faLinkedin, faInstagram, faGithub, faYoutube, faPinterest } from '@fortawesome/free-brands-svg-icons';
+
+const iconMap = {
+  twitter: faTwitter,
+  facebook: faFacebook,
+  linkedin: faLinkedin,
+  instagram: faInstagram,
+  github: faGithub,
+  youtube: faYoutube,
+  pinterest: faPinterest,
+};
 ---
 
 <footer class="bg-white border-t border-gray-200 mt-12">
@@ -20,11 +32,9 @@ import { siteConfig } from '../config/siteconfig';
       </nav>
       <div class="flex justify-center md:justify-end space-x-4">
         {socialLinks.map((link) => (
-          <a href={link.href} class="text-main-color hover:opacity-80 transition duration-300" aria-label={link.label}>
+          <a href={link.href} class="text-main-color hover:opacity-80 transition duration-300" aria-label={link.label} target="_blank" rel="noopener noreferrer">
             <span class="sr-only">{link.label}</span>
-            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor">
-              <use xlink:href={`/sprite.svg#${link.icon}`}></use>
-            </svg>
+            <FontAwesomeIcon icon={iconMap[link.icon as keyof typeof iconMap]} className="w-5 h-5" />
           </a>
         ))}
       </div>

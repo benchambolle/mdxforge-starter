@@ -1,54 +1,39 @@
-# Astro Starter Kit: Basics
+# MDX Forge 0.6
 
-```sh
-npm create astro@latest -- --template basics
-```
+Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à configurer.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+**Documentation en cours de rédaction**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![MDX Forge](/MDXForge-og.jpg)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Bien démarrer
+Vous trouverez les fichiers principaux dans le dossier src/config
 
-## 🚀 Project Structure
+siteconfig.ts : configuration du site
+header-footer.ts : configuration de la navigation
 
-Inside of your Astro project, you'll see the following folders and files:
+Vous pourrez configurer la navigation, vos informations générales, la bio de l'auteur, les polices de caractères, etc. dans ces deux fichiers.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Il suffit de modifier les fichiers dans le dossier src/config pour pouvoir commencer à personnaliser votre site.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Images
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Les images sont dans le dossier /public. Chaque fois que vous référencez une image, si elle est à la racine du dossier public utilisez seulement /image.jpg
+Si elle est dans un sous dossier, utilisez le chemin /sous-dossier/image.jpg
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🧞 Commandes
 
-## 🧞 Commands
+Toutes les commandes sont exécutées depuis la racine du projet, dans un terminal :
 
-All commands are run from the root of the project, from a terminal:
+| Commande                  | Action                                                    |
+| :------------------------ | :-------------------------------------------------------- |
+| `npm install`             | Installe les dépendances                                  |
+| `npm run dev`             | Démarre le serveur de développement local sur `localhost:4321` |
+| `npm run build`           | Construit votre site de production dans `./dist/`         |
+| `npm run preview`         | Prévisualisez votre build localement, avant le déploiement |
+| `npm run astro ...`       | Exécute les commandes CLI comme `astro add`, `astro check` |
+| `npm run astro -- --help` | Obtient de l'aide sur l'utilisation de l'CLI Astro        |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 👀 Vous voulez en savoir plus ?
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+N'hésitez pas à consulter [notre documentation](https://docs.astro.build) ou à rejoindre notre [serveur Discord](https://astro.build/chat).

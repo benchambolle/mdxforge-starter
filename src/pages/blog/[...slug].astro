@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/siteconfig';
+import Author from '../../components/Author.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -20,7 +21,7 @@ const { Content } = await post.render();
 
 <Layout title={`${post.data.title} | ${siteConfig.siteName}`}>
   <main class="container mx-auto px-4 py-8">
-    <article class="prose prose-lg mx-auto">
+    <article class="prose prose-lg mx-auto max-w-4xl">
       <h1 class="text-4xl font-bold mb-4 text-main-color">{post.data.title}</h1>
       <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-8 block">
         {post.data.pubDate.toLocaleDateString('fr-FR', {
@@ -36,6 +37,9 @@ const { Content } = await post.render();
         <Content />
       </div>
     </article>
+    <div class="max-w-4xl mx-auto">
+      <Author />
+    </div>
   </main>
 </Layout>
 
@@ -44,8 +48,6 @@ const { Content } = await post.render();
     color: var(--mainColor);
   }
   .prose {
-    max-width: 65ch;
-    margin: 0 auto;
     color: var(--text-color);
   }
   .mdx-content {

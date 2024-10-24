@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/siteconfig';
+---
+
+<Layout title="Politique de Confidentialité | MDXForge">
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center mb-12 text-main-color">Politique de Confidentialité</h1>
+    
+    <div class="prose prose-lg mx-auto">
+      <p>Ici mettez votre politique de confidentialité personnelle ou remplacez le lien dans le footer.</p>
+    </div>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+</style>

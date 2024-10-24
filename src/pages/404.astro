@@ -28,21 +28,22 @@ import Layout from '../layouts/Layout.astro';
 <script>
   const eye = document.querySelector('.eye');
   const pupil = document.querySelector('.pupil');
-
-  document.addEventListener('mousemove', (event) => {
-    const eyeRect = eye.getBoundingClientRect();
+  const eyeRect = eye?.getBoundingClientRect();
+  if (eyeRect) {
     const eyeCenterX = eyeRect.left + eyeRect.width / 2;
     const eyeCenterY = eyeRect.top + eyeRect.height / 2;
 
-    const angle = Math.atan2(event.clientY - eyeCenterY, event.clientX - eyeCenterX);
-    const distance = Math.min(10, Math.hypot(event.clientX - eyeCenterX, event.clientY - eyeCenterY) / 10);
+    document.addEventListener('mousemove', (event) => {
+      const angle = Math.atan2(event.clientY - eyeCenterY, event.clientX - eyeCenterX);
+      const distance = Math.min(10, Math.hypot(event.clientX - eyeCenterX, event.clientY - eyeCenterY) / 10);
 
-    const pupilX = 50 + Math.cos(angle) * distance;
-    const pupilY = 50 + Math.sin(angle) * distance;
+      const pupilX = 50 + Math.cos(angle) * distance;
+      const pupilY = 50 + Math.sin(angle) * distance;
 
-    pupil.setAttribute('cx', pupilX);
-    pupil.setAttribute('cy', pupilY);
-  });
+      pupil?.setAttribute('cx', pupilX.toString());
+      pupil?.setAttribute('cy', pupilY.toString());
+    });
+  }
 </script>
 
 <style>

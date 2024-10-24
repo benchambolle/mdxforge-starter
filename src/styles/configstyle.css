@@ -19,7 +19,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--title-font);
-  color: var(--text-color);
+  color: var(--main-color);
 }
 
 a {
@@ -37,7 +37,7 @@ a {
 .blog-content h4,
 .blog-content h5,
 .blog-content h6 {
-  color: var(--text-color);
+  color: var(--main-color);
 }
 
 .blog-content a {

@@ -1,0 +1,45 @@
+---
+import { siteConfig } from '../config/siteconfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
+const { name, avatar, bio, twitter, instagram } = siteConfig.author;
+---
+
+<div class="author-card bg-main-color-light rounded-lg p-8 mt-12 mb-8">
+  <div class="flex flex-col md:flex-row items-center md:items-start">
+    <div class="avatar-container mb-4 md:mb-0 md:mr-6">
+      <img src={avatar} alt={name} class="w-24 h-24 rounded-full border-4 border-main-color-lighter">
+    </div>
+    <div class="flex-grow">
+      <h3 class="text-2xl font-semibold text-main-color mb-2">{name}</h3>
+      <p class="text-gray-700 mb-4">{bio}</p>
+      <div class="flex space-x-4">
+        {twitter && (
+          <a href={twitter} target="_blank" rel="noopener noreferrer" class="text-main-color hover:opacity-80 transition-opacity">
+            <FontAwesomeIcon icon={faTwitter} className="w-6 h-6" />
+            <span class="sr-only">Twitter</span>
+          </a>
+        )}
+        {instagram && (
+          <a href={instagram} target="_blank" rel="noopener noreferrer" class="text-main-color hover:opacity-80 transition-opacity">
+            <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
+            <span class="sr-only">Instagram</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 5%, white);
+  }
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .border-main-color-lighter {
+    border-color: color-mix(in srgb, var(--mainColor) 20%, white);
+  }
+</style>

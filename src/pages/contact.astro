@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig } from '../config/siteconfig';
+---
+
+<Layout title="Contact | MDXForge">
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center mb-12 text-main-color">Contactez-nous</h1>
+    
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-8" role="alert">
+        <p class="font-bold">Note pour les développeurs :</p>
+        <p>N'oubliez pas de configurer le webhook dans le composant ContactForm pour que le formulaire fonctionne correctement.</p>
+      </div>
+
+      <ContactForm 
+        webhook="https://votre-webhook-personnalise.com"
+        subjects={['Demande d\'information', 'Support technique', 'Partenariat', 'Autre']}
+      />
+    </div>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+</style>

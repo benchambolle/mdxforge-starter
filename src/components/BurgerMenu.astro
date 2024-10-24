@@ -1,5 +1,5 @@
 ---
-import { headerLinks } from '../config/header-footer';
+import { headerLinks, headerCTA } from '../config/header-footer';
 ---
 
 <div class="burger-menu">
@@ -10,12 +10,30 @@ import { headerLinks } from '../config/header-footer';
   </button>
   <nav id="mobile-nav" class="mobile-nav hidden">
     <ul>
-      {headerLinks.map((link) => (
+      {headerLinks.map((item) => (
         <li>
-          <a href={link.href} class="mobile-link">{link.text}</a>
+          {item.children ? (
+            <div>
+              <span class="mobile-link">{item.text}</span>
+              <ul class="ml-4">
+                {item.children.map((subItem) => (
+                  <li>
+                    <a href={subItem.href} class="mobile-link">{subItem.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <a href={item.href} class="mobile-link">{item.text}</a>
+          )}
         </li>
       ))}
     </ul>
+    <div class="mt-6">
+      <a href={headerCTA.href} class="mobile-cta">
+        {headerCTA.text}
+      </a>
+    </div>
   </nav>
 </div>
 
@@ -90,5 +108,15 @@ import { headerLinks } from '../config/header-footer';
   }
   .hidden {
     display: none;
+  }
+  .mobile-cta {
+    display: block;
+    background-color: var(--main-color);
+    color: white;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
   }
 </style>

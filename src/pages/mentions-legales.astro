@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/siteconfig';
+---
+
+<Layout title="Mentions Légales | MDXForge">
+  <main class="container mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center mb-12 text-main-color">Mentions Légales</h1>
+    
+    <div class="prose prose-lg mx-auto text-main-color">
+      <p>Insérez ici vos mentions légales.</p>
+      
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Éditeur du site</h2>
+      <p class="mb-2">[Nom de votre entreprise ou votre nom]</p>
+      <p class="mb-2">[Adresse]</p>
+      <p class="mb-2">[Numéro de téléphone]</p>
+      <p class="mb-2">[Adresse e-mail]</p>
+
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Directeur de la publication</h2>
+      <p class="mb-2">[Nom du directeur de la publication]</p>
+
+      <h2 class="text-3xl font-semibold mt-8 mb-4">Hébergeur</h2>
+      <p class="mb-2">[Nom de l'hébergeur]</p>
+      <p class="mb-2">[Adresse de l'hébergeur]</p>
+    </div>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+</style>

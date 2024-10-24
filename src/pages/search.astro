@@ -39,7 +39,7 @@ const searchableContent = [
   </main>
 </Layout>
 
-<script define:vars={{ searchableContent, mainColor: siteConfig.mainColor }}>
+<script define:vars={{ searchableContent, mainColor: siteConfig.mainColor }} is:inline>
   import('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.esm.js').then((module) => {
     const Fuse = module.default;
     const fuse = new Fuse(searchableContent, {
