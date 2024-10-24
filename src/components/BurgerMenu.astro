@@ -1,0 +1,94 @@
+---
+import { headerLinks } from '../config/header-footer';
+---
+
+<div class="burger-menu">
+  <button id="burger-toggle" class="burger-toggle" aria-label="Toggle menu">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
+  <nav id="mobile-nav" class="mobile-nav hidden">
+    <ul>
+      {headerLinks.map((link) => (
+        <li>
+          <a href={link.href} class="mobile-link">{link.text}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  const burgerToggle = document.getElementById('burger-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  burgerToggle?.addEventListener('click', () => {
+    mobileNav?.classList.toggle('hidden');
+    burgerToggle.classList.toggle('active');
+  });
+</script>
+
+<style>
+  .burger-menu {
+    display: none;
+    position: relative;
+  }
+  .burger-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 1000;
+  }
+  .burger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--main-color);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s;
+  }
+  .burger-line:nth-child(1) { top: 0; }
+  .burger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .burger-line:nth-child(3) { bottom: 0; }
+  .burger-toggle.active .burger-line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .burger-toggle.active .burger-line:nth-child(2) { opacity: 0; }
+  .burger-toggle.active .burger-line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(26, 26, 26, 0.95);
+    padding: 5rem 2rem 2rem;
+    z-index: 999;
+  }
+  .mobile-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .mobile-nav li {
+    margin-bottom: 1rem;
+  }
+  .mobile-link {
+    color: var(--main-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    padding: 0.5rem 0;
+  }
+  @media (max-width: 768px) {
+    .burger-menu {
+      display: block;
+    }
+  }
+  .hidden {
+    display: none;
+  }
+</style>

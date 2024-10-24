@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config/siteconfig';
+
+// Récupérer les articles de blog
+const allPosts = await getCollection('blog');
+
+// Récupérer les pages (vous devrez ajuster ceci en fonction de la structure de votre projet)
+const pages = [
+  { title: 'Accueil', url: '/', description: 'Page d\'accueil de MDXForge' },
+  { title: 'À propos', url: '/about', description: 'En savoir plus sur MDXForge' },
+  // Ajoutez d'autres pages ici
+];
+
+const searchableContent = [
+  ...allPosts.map(post => ({
+    title: post.data.title,
+    url: `/blog/${post.slug}`,
+    description: post.data.description || '',
+    type: 'article'
+  })),
+  ...pages.map(page => ({ ...page, type: 'page' }))
+];
+---
+
+<Layout title="Recherche">
+  <main class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-6 text-center">Recherche</h1>
+    <div id="search-container" class="max-w-2xl mx-auto">
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder="Rechercher..." 
+        class="w-full p-2 mb-4 bg-main-color-light text-gray-800 rounded border border-main-color placeholder-gray-600"
+      >
+      <div id="search-results" class="space-y-4"></div>
+    </div>
+  </main>
+</Layout>
+
+<script define:vars={{ searchableContent, mainColor: siteConfig.mainColor }}>
+  import('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.esm.js').then((module) => {
+    const Fuse = module.default;
+    const fuse = new Fuse(searchableContent, {
+      keys: ['title', 'description'],
+      includeScore: true,
+      threshold: 0.4,
+    });
+
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value;
+      const results = fuse.search(searchTerm);
+
+      searchResults.innerHTML = results
+        .map(result => `
+          <div class="bg-main-color-light rounded-lg p-4 shadow-md">
+            <a href="${result.item.url}" class="block hover:opacity-80">
+              <h3 class="text-xl font-semibold text-main-color">${result.item.title}</h3>
+              <p class="text-sm text-gray-600 mt-1">${result.item.type === 'article' ? 'Article' : 'Page'}</p>
+              <p class="text-gray-800 mt-2">${result.item.description}</p>
+            </a>
+          </div>
+        `)
+        .join('');
+    });
+  });
+</script>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 10%, white);
+  }
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .border-main-color {
+    border-color: var(--mainColor);
+  }
+  #search-input::placeholder {
+    color: #4a5568; /* Tailwind's gray-600 */
+  }
+</style>

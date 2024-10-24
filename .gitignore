@@ -1,0 +1,63 @@
+# Dépendances
+node_modules/
+
+# Fichiers de build
+dist/
+.output/
+
+# Fichiers générés
+.astro/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Fichiers d'environnement
+.env
+.env.production
+
+# Fichiers macOS
+.DS_Store
+
+# Fichiers temporaires
+*.log
+*.swp
+*.tmp
+
+# Fichiers de cache
+.cache/
+
+# Fichiers d'éditeur
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de test de couverture
+coverage/
+
+# Fichiers de build Astro
+.astro/
+
+# Fichiers de déploiement Netlify
+.netlify/
+
+# Fichiers de déploiement Vercel
+.vercel/
+
+# Fichiers de déploiement Cloudflare
+.cloudflare/
+
+# Fichiers de déploiement GitHub Pages
+.gh-pages/
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+
+# Fichiers de configuration personnels
+.npmrc
+.yarnrc
+.env 

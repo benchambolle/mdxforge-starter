@@ -1,0 +1,106 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { siteConfig } from '../../config/siteconfig';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} | ${siteConfig.siteName}`}>
+  <main class="container mx-auto px-4 py-8">
+    <article class="prose prose-lg mx-auto">
+      <h1 class="text-4xl font-bold mb-4 text-main-color">{post.data.title}</h1>
+      <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-8 block">
+        {post.data.pubDate.toLocaleDateString('fr-FR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </time>
+      {post.data.heroImage && (
+        <img src={post.data.heroImage} alt={post.data.title} class="w-full h-auto rounded-lg shadow-lg mb-8" />
+      )}
+      <div class="mdx-content">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .prose {
+    max-width: 65ch;
+    margin: 0 auto;
+    color: var(--text-color);
+  }
+  .mdx-content {
+    color: var(--text-color);
+  }
+  .mdx-content :global(h1),
+  .mdx-content :global(h2),
+  .mdx-content :global(h3),
+  .mdx-content :global(h4),
+  .mdx-content :global(h5),
+  .mdx-content :global(h6) {
+    color: var(--mainColor);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+  .mdx-content :global(h1) { font-size: 2.5em; }
+  .mdx-content :global(h2) { font-size: 2em; }
+  .mdx-content :global(h3) { font-size: 1.75em; }
+  .mdx-content :global(h4) { font-size: 1.5em; }
+  .mdx-content :global(h5) { font-size: 1.25em; }
+  .mdx-content :global(h6) { font-size: 1em; }
+  .mdx-content :global(p),
+  .mdx-content :global(ul),
+  .mdx-content :global(ol) {
+    margin-bottom: 1em;
+  }
+  .mdx-content :global(a) {
+    color: var(--mainColor);
+    text-decoration: underline;
+  }
+  .mdx-content :global(pre) {
+    background-color: #f4f4f4;
+    padding: 1em;
+    border-radius: 0.3em;
+    overflow-x: auto;
+  }
+  .mdx-content :global(code) {
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 0.3em;
+    font-size: 0.9em;
+  }
+  .mdx-content :global(ul),
+  .mdx-content :global(ol) {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+  }
+  .mdx-content :global(ul) {
+    list-style-type: disc;
+  }
+  .mdx-content :global(ol) {
+    list-style-type: decimal;
+  }
+  .mdx-content :global(li) {
+    margin-bottom: 0.5em;
+  }
+</style>

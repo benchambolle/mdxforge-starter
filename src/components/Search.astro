@@ -1,0 +1,72 @@
+---
+// Supprimez cette ligne car nous n'utilisons plus le composant Search d'astro-pagefind
+// import Search from "astro-pagefind/components/Search";
+---
+
+<div class="search-container">
+  <button id="search-toggle" class="search-toggle" aria-label="Ouvrir la recherche">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </button>
+  <div id="search-popup" class="search-popup hidden">
+    <input type="text" id="search-input" placeholder="Rechercher..." class="w-full p-2 mb-4 bg-gray-700 text-white rounded">
+    <ul id="search-results"></ul>
+  </div>
+</div>
+
+<script>
+  const searchToggle = document.getElementById('search-toggle');
+  const searchPopup = document.getElementById('search-popup');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  searchToggle?.addEventListener('click', () => {
+    searchPopup?.classList.toggle('hidden');
+    if (!searchPopup?.classList.contains('hidden')) {
+      searchInput?.focus();
+    }
+  });
+
+  // Fermer le popup si on clique en dehors
+  document.addEventListener('click', (event) => {
+    if (!searchPopup?.contains(event.target as Node) && !searchToggle?.contains(event.target as Node)) {
+      searchPopup?.classList.add('hidden');
+    }
+  });
+
+  // Redirection vers la page de recherche
+  searchInput?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const searchTerm = (e.target as HTMLInputElement).value;
+      window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+    }
+  });
+</script>
+
+<style>
+  .search-container {
+    position: relative;
+  }
+  .search-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--main-color);
+  }
+  .search-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background: var(--pagefind-ui-background);
+    border: 1px solid var(--pagefind-ui-border);
+    border-radius: var(--pagefind-ui-border-radius);
+    padding: 1rem;
+    z-index: 1000;
+  }
+  .hidden {
+    display: none;
+  }
+</style>

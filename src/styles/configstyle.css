@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #3498db; /* Votre couleur principale */
+  --main-color-rgb: 52, 152, 219; /* Les valeurs RGB de votre couleur principale */
+  --text-color: #333333;
+  --background-color: #ffffff;
+  --title-font: 'Roboto', sans-serif; /* Utilisez la police définie dans siteConfig */
+  --body-font: 'Open Sans', sans-serif; /* Utilisez la police définie dans siteConfig */
+}
+
+body {
+  font-family: var(--body-font);
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--title-font);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--main-color);
+}
+
+/* Styles spécifiques pour le blog */
+.blog-content {
+  color: var(--text-color);
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  color: var(--text-color);
+}
+
+.blog-content a {
+  color: var(--main-color);
+  text-decoration: underline;
+}
+
+/* Classe utilitaire pour la couleur principale */
+.text-main-color {
+  color: var(--main-color);
+}
+
+.bg-main-color {
+  background-color: var(--main-color);
+}
+
+/* ... autres styles ... */

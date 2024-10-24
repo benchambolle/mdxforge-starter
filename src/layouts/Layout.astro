@@ -1,0 +1,59 @@
+---
+import { SEO } from 'astro-seo';
+import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/configstyle.css';
+import { siteConfig } from '../config/siteconfig';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = siteConfig.siteName, description = siteConfig.siteDescription } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href={siteConfig.faviconPath} />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="alternate" type="application/rss+xml" title={`RSS Feed for ${siteConfig.siteName}`} href="/rss.xml" />
+		<link href={`https://fonts.googleapis.com/css2?family=${siteConfig.titleFont.replace(' ', '+')}&family=${siteConfig.bodyFont.replace(' ', '+')}&display=swap`} rel="stylesheet">
+		<SEO
+			title={title}
+			description={description}
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: siteConfig.ogImage,
+				}
+			}}
+		/>
+		<ViewTransitions />
+	</head>
+	<body class="flex flex-col min-h-screen">
+		<Header />
+		<main class="flex-grow container mx-auto px-4 pt-8">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style define:vars={{ mainColor: siteConfig.mainColor, titleFont: siteConfig.titleFont, bodyFont: siteConfig.bodyFont }}>
+	:root {
+		--main-color: var(--mainColor);
+	}
+	body {
+		font-family: var(--bodyFont), sans-serif;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--titleFont), sans-serif;
+	}
+</style>
