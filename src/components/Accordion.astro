@@ -1,0 +1,58 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="accordion">
+  {items.map((item, index) => (
+    <div class="accordion-item mb-4">
+      <button class="accordion-header w-full text-left px-4 py-2 bg-main-color-light text-main-color font-semibold rounded-md focus:outline-none flex justify-between items-center" aria-expanded="false">
+        {item.question}
+        <svg class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div class="accordion-content hidden px-4 py-2 bg-white bg-opacity-50 rounded-md">
+        <p>{item.answer}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      if (content) {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', (!expanded).toString());
+        content.classList.toggle('hidden', expanded);
+        const svg = button.querySelector('svg');
+        if (svg) {
+          svg.classList.toggle('rotate-180', !expanded);
+        }
+      }
+    });
+  });
+</script>
+
+<style define:vars={{ mainColor: 'var(--main-color)' }}>
+  .accordion-header {
+    background-color: var(--main-color-light);
+    color: var(--main-color);
+    transition: background-color 0.3s;
+  }
+  .accordion-header:hover {
+    background-color: var(--main-color);
+    color: white;
+  }
+  .accordion-content {
+    background-color: rgba(var(--main-color-rgb), 0.1);
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+</style>

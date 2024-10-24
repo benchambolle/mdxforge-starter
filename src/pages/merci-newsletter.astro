@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/siteconfig';
+
+---
+
+<Layout title="Merci pour votre inscription">
+  <main class="container mx-auto px-4 py-16 text-center">
+    <h1 class="text-4xl font-bold mb-8 text-main-color">Merci pour votre inscription !</h1>
+    <p class="text-xl mb-8">Veuillez vérifier votre boîte de réception pour confirmer votre adresse email.</p>
+    <a href="/" class="bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+      Retour à l'accueil
+    </a>
+  </main>
+</Layout>
+
+<style define:vars={{ mainColor: siteConfig.mainColor }}>
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .bg-main-color {
+    background-color: var(--mainColor);
+  }
+</style>

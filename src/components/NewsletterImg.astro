@@ -5,26 +5,25 @@ interface Props {
   webhook?: string;
   image: string;
   alt: string;
+  redirectUrl?: string;
 }
 
-const { webhook = 'https://votre-webhook-par-defaut.com', image, alt } = Astro.props;
+const { webhook = 'https://votre-webhook-par-defaut.com', image, alt, redirectUrl } = Astro.props;
 ---
 
-<div class="newsletter-card bg-main-color-light rounded-lg p-8 mt-12 mb-8 flex flex-col md:flex-row items-center">
-  <div class="md:w-1/3 mb-6 md:mb-0 md:mr-8">
-    <img src={image} alt={alt} class="w-full h-auto max-h-64 object-cover rounded-lg shadow-md">
+<div class="newsletter-img-card bg-main-color-light rounded-lg p-8 mt-12 mb-8 flex flex-col md:flex-row items-center md:items-center">
+  <div class="md:w-1/3 flex justify-center md:justify-start">
+    <img src={image} alt={alt} class="w-96 h-96 object-cover rounded-lg mb-4 md:mb-0" />
   </div>
-  <div class="md:w-2/3">
+  <div class="md:w-2/3 md:pl-8 flex flex-col justify-center">
     <h3 class="text-2xl font-semibold text-main-color mb-4">Abonnez-vous à notre newsletter</h3>
     <p class="text-gray-700 mb-6">Restez informé de nos dernières actualités et articles.</p>
-    <form id="newsletter-form" class="space-y-4">
+    <form id="newsletter-img-form" class="space-y-4">
       <div>
-        <label for="firstname" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-        <input type="text" id="firstname" name="firstname" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
+        <input type="text" id="firstname" name="firstname" placeholder="Prénom" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
       </div>
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
+        <input type="email" id="email" name="email" placeholder="Email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-color">
       </div>
       <div class="flex items-start">
         <input type="checkbox" id="gdpr" name="gdpr" required class="mt-1 mr-2">
@@ -35,8 +34,8 @@ const { webhook = 'https://votre-webhook-par-defaut.com', image, alt } = Astro.p
   </div>
 </div>
 
-<script define:vars={{ webhook }} is:inline>
-  const form = document.getElementById('newsletter-form');
+<script define:vars={{ webhook, redirectUrl }} is:inline>
+  const form = document.getElementById('newsletter-img-form');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -52,8 +51,12 @@ const { webhook = 'https://votre-webhook-par-defaut.com', image, alt } = Astro.p
       });
 
       if (response.ok) {
-        alert('Merci pour votre inscription !');
-        form.reset();
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        } else {
+          alert('Merci pour votre inscription !');
+          form.reset();
+        }
       } else {
         throw new Error('Erreur lors de l\'inscription');
       }

@@ -1,190 +1,119 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Accordion from '../components/Accordion.astro';
 import { siteConfig } from '../config/siteconfig';
 import { getCollection } from 'astro:content';
-import NewsletterImg from '../components/NewsletterImg.astro';
+import { faRocket, faBolt, faCode } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Récupérer les 3 derniers articles du blog
-const latestPosts = (await getCollection('blog'))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const faqItems = [
+  { question: 'Comment puis-je m\'inscrire ?', answer: 'Vous pouvez vous inscrire en utilisant le formulaire d\'inscription sur notre page d\'accueil.' },
+  { question: 'Quels sont les avantages de MDXForge ?', answer: 'MDXForge offre une intégration facile avec Astro et MDX, permettant une création de contenu rapide et flexible.' },
+];
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 3);
 ---
 
-<Layout title="Accueil | MDXForge">
-	<main class="container mx-auto px-4 py-16">
-		<h1 class="text-5xl font-bold text-center mb-12 text-main-color">Bienvenue sur votre tout nouveau MDXForge !</h1>
-		
-		<p class="text-xl text-center mb-12">
-			Félicitations ! Vous venez de lancer votre site MDXForge. C'est le moment de commencer à créer quelque chose d'extraordinaire !
-		</p>
+<Layout title="Accueil">
+  <main class="container mx-auto px-4 py-16">
+    <!-- Hero Section -->
+    <section class="hero flex flex-col md:flex-row items-center mb-12 py-16 bg-white">
+      <div class="md:w-2/3 md:pr-8 space-y-10 text-center md:text-left">
+        <h1 class="text-6xl font-extrabold text-main-color">Bienvenue sur MDXForge</h1>
+        <p class="text-lg text-gray-700">Un template Astro en français, SEO friendly,rapide et facile à configurer. Installez le repo et c'est parti !</p>
+        <a href="https://github.com/benchambolle/mdxforge-starter" class="inline-block bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+          Découvrir sur GitHub
+        </a>
+      </div>
+      <div class="md:w-1/3 mt-8 md:mt-0 flex justify-center">
+        <img src="/MDXForge-og.jpg" alt="MDXForge" class="w-full h-auto rounded-lg shadow-md" />
+      </div>
+    </section>
 
-		<div class="image-container mb-12"> <!-- Changé de mb-8 à mb-12 -->
-			<img src="/MDXForge-og.jpg" alt="MDXForge" class="mx-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-		</div>
+    <!-- Features Section -->
+    <section class="features mb-12 py-8">
+      <h2 class="text-3xl font-semibold text-center mb-8 text-main-color">Pourquoi choisir MDXForge ?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature bg-main-color-light p-6 rounded-lg shadow-lg flex items-center">
+          <FontAwesomeIcon icon={faRocket} className="w-8 h-8 text-main-color mr-4" />
+          <div>
+            <h3 class="text-xl font-semibold mb-2 text-main-color">Facile à configurer</h3>
+            <p>MDXForge est conçu pour être simple à configurer, vous permettant de vous concentrer sur la création de contenu.</p>
+          </div>
+        </div>
+        <div class="feature bg-main-color-light p-6 rounded-lg shadow-lg flex items-center">
+          <FontAwesomeIcon icon={faBolt} className="w-8 h-8 text-main-color mr-4" />
+          <div>
+            <h3 class="text-xl font-semibold mb-2 text-main-color">Performant</h3>
+            <p>Profitez de performances optimales grâce à l'intégration d'Astro et de Tailwind CSS.</p>
+          </div>
+        </div>
+        <div class="feature bg-main-color-light p-6 rounded-lg shadow-lg flex items-center">
+          <FontAwesomeIcon icon={faCode} className="w-8 h-8 text-main-color mr-4" />
+          <div>
+            <h3 class="text-xl font-semibold mb-2 text-main-color">Open Source</h3>
+            <p>Contribuez à un projet open source et rejoignez notre communauté de développeurs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<div class="text-center mb-16 pt-8">
-			<a href="https://github.com/benchambolle/mdxforge-starter" class="inline-block bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
-				Installer MDXForge
-			</a>
-		</div>
+    <!-- Latest Blog Posts Section -->
+    <section class="latest-posts mb-12">
+      <h2 class="text-3xl font-semibold text-center mb-8 text-main-color">Derniers Articles</h2>
+      <ul class="space-y-6">
+        {posts.map((post) => (
+          <li class="bg-white shadow-md rounded-lg overflow-hidden">
+            <a href={`/blog/${post.slug}/`} class="flex flex-col md:flex-row hover:bg-gray-50 transition duration-300">
+              {post.data.heroImage && (
+                <div class="md:w-1/4">
+                  <img 
+                    src={post.data.heroImage} 
+                    alt={post.data.title} 
+                    class="w-full h-48 md:h-full object-cover"
+                  />
+                </div>
+              )}
+              <div class="p-4 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h3>
+                  <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
+                    {post.data.pubDate.toLocaleDateString('fr-FR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
+                </div>
+                <div class="text-main-color font-semibold text-sm flex items-center">
+                  Lire la suite 
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-			<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
-				<h2 class="text-2xl font-semibold mb-6 text-main-color">Commencer avec MDXForge</h2>
-				<p class="mb-6">Cette page est votre point de départ. Modifiez le fichier <code class="bg-main-color bg-opacity-20 px-2 py-1 rounded">src/pages/index.astro</code> pour personnaliser cette page d'accueil.</p>
-				<a href="https://docs.astro.build/fr/getting-started/" class="text-main-color hover:underline">En savoir plus sur Astro →</a>
-			</div>
-			<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
-				<h2 class="text-2xl font-semibold mb-6 text-main-color">Explorez MDXForge</h2>
-				<p class="mb-6">MDXForge est basé sur Astro et offre des fonctionnalités supplémentaires pour la création de contenu avec MDX.</p>
-				<a href="/about" class="text-main-color hover:underline">Découvrir les fonctionnalités →</a>
-			</div>
-		</div>
-
-		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Ressources utiles</h2>
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-			{[
-				{ title: 'Documentation Astro', url: 'https://docs.astro.build', icon: 'book' },
-				{ title: 'Intégrations Astro', url: 'https://astro.build/integrations/', icon: 'puzzle' },
-				{ title: 'Thèmes Astro', url: 'https://astro.build/themes/', icon: 'palette' },
-				{ title: 'Communauté Astro', url: 'https://astro.build/chat', icon: 'chat' },
-			].map((item) => (
-				<a href={item.url} class="bg-main-color-light p-8 rounded-lg shadow-lg hover:bg-main-color hover:bg-opacity-20 transition-colors">
-					<svg class="w-16 h-16 mb-6 mx-auto text-main-color" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						{item.icon === 'book' && (
-							<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-							<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-						)}
-						{item.icon === 'puzzle' && (
-							<path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77a.98.98 0 0 1 .837-.276c.47.07.802.48.968.925a2.501 2.501 0 1 0 3.214-3.214c-.446-.166-.894-.527-.967-1.02a.979.979 0 0 1 .276-.837l1.61-1.61a2.404 2.404 0 0 1 1.705-.707 2.402 2.402 0 0 1 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z"></path>
-						)}
-						{item.icon === 'palette' && (
-							<circle cx="13.5" cy="6.5" r=".5"></circle>
-							<circle cx="17.5" cy="10.5" r=".5"></circle>
-							<circle cx="8.5" cy="7.5" r=".5"></circle>
-							<circle cx="6.5" cy="12.5" r=".5"></circle>
-							<path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
-						)}
-						{item.icon === 'chat' && (
-							<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-						)}
-					</svg>
-					<h3 class="text-xl font-semibold text-center text-main-color">{item.title}</h3>
-				</a>
-			))}
-		</div>
-
-		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Derniers articles du blog</h2>
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-			{latestPosts.map((post) => (
-				<a href={`/blog/${post.slug}/`} class="bg-main-color-light rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-					{post.data.heroImage && (
-						<img src={post.data.heroImage} alt={post.data.title} class="w-full h-48 object-cover" />
-					)}
-					<div class="p-6">
-						<h3 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h3>
-						<p class="text-gray-600 text-sm mb-4">{post.data.description}</p>
-						<time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500">
-							{post.data.pubDate.toLocaleDateString('fr-FR', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-							})}
-						</time>
-					</div>
-				</a>
-			))}
-		</div>
-
-		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">FAQ</h2>
-		<div class="space-y-6 mb-24">
-			{[
-				{ question: "Qu'est-ce que MDXForge ?", answer: "MDXForge est un template Astro conçu pour simplifier la création de sites web statiques et de blogs, en utilisant MDX pour le contenu." },
-				{ question: "Pourquoi utiliser MDXForge ?", answer: "MDXForge offre une solution prête à l'emploi, optimisée pour les performances et le SEO, tout en permettant une grande flexibilité dans la création de contenu." },
-				{ question: "Comment puis-je personnaliser mon site MDXForge ?", answer: "Vous pouvez personnaliser votre site en modifiant les fichiers dans le dossier 'src', en ajustant les styles dans 'src/styles', et en configurant les options dans 'src/config'." },
-				{ question: "MDXForge est-il adapté pour les grands sites ?", answer: "Oui, MDXForge est conçu pour être évolutif et peut gérer des sites de toutes tailles, des petits blogs personnels aux grands sites d'entreprise." },
-			].map((item, index) => (
-				<div class="bg-main-color-light rounded-lg shadow-lg overflow-hidden">
-					<button
-						class="flex justify-between items-center w-full p-6 text-left text-main-color font-semibold focus:outline-none"
-						id={`accordion-button-${index}`}
-						aria-expanded="false"
-						aria-controls={`accordion-content-${index}`}
-					>
-						{item.question}
-						<svg class="w-6 h-6 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-						</svg>
-					</button>
-					<div
-						id={`accordion-content-${index}`}
-						class="hidden p-6 border-t border-main-color border-opacity-20"
-						aria-labelledby={`accordion-button-${index}`}
-					>
-						<p>{item.answer}</p>
-					</div>
-				</div>
-			))}
-		</div>
-
-		<!-- Ajout du composant NewsletterImg ici -->
-		<NewsletterImg 
-			webhook="https://votre-webhook-personnalise.com"
-			image="newsletter.webp"
-			alt="Description de l'image"
-		/>
-	</main>
+    <!-- FAQ Section -->
+    <section class="faq py-8">
+      <h2 class="text-3xl font-semibold mb-6 text-main-color">FAQ</h2>
+      <Accordion items={faqItems} />
+    </section>
+  </main>
 </Layout>
 
-<script>
-	const button = document.querySelector('button[aria-controls]');
-	if (button) {
-		const controlsId = button.getAttribute('aria-controls');
-		if (controlsId) {
-			const content = document.getElementById(controlsId);
-			if (content) {
-				content.classList.toggle('hidden');
-			}
-			button.querySelector('svg')?.classList.toggle('rotate-180');
-		}
-	}
-</script>
-
 <style define:vars={{ mainColor: siteConfig.mainColor }}>
-	.text-gradient {
-		background-image: linear-gradient(45deg, var(--mainColor), #000000);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.bg-main-color-light {
-		background-color: color-mix(in srgb, var(--mainColor) 10%, white);
-	}
-	.text-main-color {
-		color: var(--mainColor);
-	}
-	.bg-main-color {
-		background-color: var(--mainColor);
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-	.image-container {
-		max-width: 600px;
-		margin: 0 auto;
-		overflow: hidden;
-	}
-	.image-container img {
-		width: 100%;
-		height: auto;
-		animation: fadeIn 1s ease-out;
-	}
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
+  .text-main-color {
+    color: var(--mainColor);
+  }
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 10%, white);
+  }
 </style>
-
-

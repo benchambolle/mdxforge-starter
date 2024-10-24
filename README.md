@@ -1,4 +1,4 @@
-# MDX Forge 0.6
+# MDX Forge 1.0
 
 Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à configurer.
 
