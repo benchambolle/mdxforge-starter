@@ -26,8 +26,10 @@ export default defineConfig({
     compressor()
   ],
   site: siteConfig.siteUrl,
+  output: 'static',
+  trailingSlash: 'never',
   build: {
-    format: 'file'
+    format: 'directory'
   },
   markdown: {
     shikiConfig: {
