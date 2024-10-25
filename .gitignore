@@ -60,4 +60,4 @@ coverage/
 # Fichiers de configuration personnels
 .npmrc
 .yarnrc
-.env 
+
