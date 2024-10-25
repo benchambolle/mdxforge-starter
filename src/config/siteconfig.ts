@@ -3,7 +3,7 @@ export const siteConfig = {
   siteName: "MDX Forge",
   siteUrl: "https://votre-site.com", // Ajoutez l'URL de votre site ici
   logoPath: "/logo.png", // Assurez-vous que ce chemin est correct
-  faviconPath: "/favicon.svg",
+  faviconPath: "/favicon.png",
   mainColor: "#38b6ff", // Assurez-vous que cette couleur convient pour un thème clair
   siteDescription: "Un template Astro en français, rapide et facile à configurer.",
   ogImage: "/MDXForge-og.jpg",

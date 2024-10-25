@@ -1,4 +1,4 @@
-# MDX Forge 1.0
+# MDX Forge 1.2
 
 Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à configurer.
 
@@ -20,6 +20,16 @@ Il suffit de modifier les fichiers dans le dossier src/config pour pouvoir comme
 
 Les images sont dans le dossier /public. Chaque fois que vous référencez une image, si elle est à la racine du dossier public utilisez seulement /image.jpg
 Si elle est dans un sous dossier, utilisez le chemin /sous-dossier/image.jpg
+
+## Les dépendances ajoutées au Astro de base
+
+- astro mdx
+- astro sitemap
+- astro react
+- astro compress
+- astro robots.txt
+- astrojs/rss
+- fontawesome
 
 ## 🧞 Commandes
 

@@ -1,0 +1,51 @@
+# Règles cruciales pour Astro et MDX Forge
+
+## Configuration du site
+- Utilisez `src/config/siteconfig.ts` pour configurer les paramètres globaux du site
+- Définissez le nom du site, l'URL, les chemins des logos et favicons
+- Configurez les polices Google pour les titres et le corps du texte
+- Renseignez les informations de l'auteur (nom, avatar, bio, liens sociaux)
+
+## Navigation et structure
+- Configurez la navigation dans `src/config/header-footer.ts`
+- Définissez les liens du menu principal et du pied de page
+- Ajoutez un bouton CTA personnalisable dans l'en-tête
+
+## Composants réutilisables
+- Utilisez les composants existants pour une cohérence du design :
+  - `Newsletter.astro` : formulaire d'inscription à la newsletter
+  - `NewsletterImg.astro` : variante avec image du formulaire newsletter
+  - `Accordion.astro` : module accordéon pour organiser le contenu
+  - `ContactForm.astro` : formulaire de contact personnalisable
+  - `Author.astro` : composant pour l'auteur
+  - `Header.astro` : en-tête du site
+  - `Footer.astro` : pied de page
+  - `Card.astro` : carte d'article
+
+Lors de la création d'un nouveau composant, assurez-vous de le placer dans le dossier `src/components` et de l'importer dans le composant parent. Toujours créer un composant astro plutôt que TS.
+
+## Gestion du contenu
+- Utilisez MDX pour les articles de blog et .astro pourles pages de contenu
+- Placez les fichiers MDX dans le dossier `src/content`
+- Utilisez les frontmatter pour définir les métadonnées des articles (titre, date, tags, etc.)
+
+## Images et assets
+- Stockez les images dans le dossier `/public`
+- Référencez les images avec des chemins relatifs à partir de la racine `/public`. Fonctionne avec des sous dossier `/sous-dossier/image.jpg`
+
+## SEO et performance
+- Optimisez les métadonnées dans `siteconfig.ts` pour un bon référencement
+- Utilisez les composants Astro pour une meilleure performance de rendu
+
+## Personnalisation
+- Adaptez les styles Tailwind CSS dans `tailwind.config.cjs`
+- Créez de nouveaux composants Astro pour des fonctionnalités spécifiques
+
+## Déploiement
+- Utilisez `npm run build` pour générer le site statique
+- Déployez le contenu du dossier `dist/` sur votre hébergeur
+
+## Bonnes pratiques
+- Respectez la structure des dossiers pour une organisation claire
+- Utilisez les hooks Astro pour la logique côté serveur
+- Optimisez les images et les assets pour des temps de chargement rapides
