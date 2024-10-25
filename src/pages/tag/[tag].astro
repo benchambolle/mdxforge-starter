@@ -3,28 +3,38 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/siteconfig';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
 ---
 
-<Layout title="Blog">
+<Layout title={`Articles tagués "${tag}" | ${siteConfig.siteName}`}>
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8 text-center text-main-color">Blog</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <h1 class="text-4xl font-bold mb-8 text-center text-main-color">Articles tagués "{tag}"</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {posts.map((post) => (
-        <article class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-          <a href={`/blog/${post.slug}/`} class="block">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+          <a href={`/blog/${post.slug}/`} class="block hover:opacity-90 transition duration-300">
             {post.data.heroImage && (
-              <div class="relative h-48 w-full">
-                <img 
-                  src={post.data.heroImage} 
-                  alt={post.data.title} 
-                  class="w-full h-full object-cover"
-                />
-              </div>
+              <img 
+                src={post.data.heroImage} 
+                alt={post.data.title} 
+                class="w-full h-48 object-cover"
+              />
             )}
-            <div class="p-6">
+            <div class="p-4">
               <h2 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h2>
               <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
                 {post.data.pubDate.toLocaleDateString('fr-FR', {
@@ -34,15 +44,6 @@ const posts = (await getCollection('blog')).sort(
                 })}
               </time>
               <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
-              {post.data.tags && (
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {post.data.tags.map((tag: string) => (
-                    <a href={`/tag/${tag}`} class="bg-main-color-light text-main-color text-xs px-2 py-1 rounded-full hover:opacity-80 transition-opacity">
-                      {tag}
-                    </a>
-                  ))}
-                </div>
-              )}
               <div class="text-main-color font-semibold text-sm flex items-center">
                 Lire la suite 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -51,7 +52,7 @@ const posts = (await getCollection('blog')).sort(
               </div>
             </div>
           </a>
-        </article>
+        </div>
       ))}
     </div>
   </main>

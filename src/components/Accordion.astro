@@ -7,7 +7,7 @@ const { items } = Astro.props;
 ---
 
 <div class="accordion">
-  {items.map((item, index) => (
+  {items.map((item) => (
     <div class="accordion-item mb-4">
       <button class="accordion-header w-full text-left px-4 py-2 bg-main-color-light text-main-color font-semibold rounded-md focus:outline-none flex justify-between items-center" aria-expanded="false">
         {item.question}

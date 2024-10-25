@@ -5,11 +5,20 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.2] - 2024-10-25
+
+- Ajout d'un module Accordion
+- Amélioration du design de la page d'accueil
+- Ajout du support des tags (affichage dans les cartes articles)
+- Ajout des tags clickables dans les articles et dans la page d'archive
+- Ajout d'une page tag pour lister les articles par tag 
+
 ## [1.1] - 2024-10-24
 
 ### Ajouté
 
--composant newsletter, connecté à un webhook compatible avec n8n, zapier et make pour pas etre prisonnier d’un autoresponder
+- composant newsletter, connecté à un webhook compatible avec n8n, zapier et make pour pas etre prisonnier d’un autoresponder
 - correction du header et ajout d’un bouton CTA configurable dans header-footer.ts
 - 2e module newsletter avec le design d’une image
 - module “formulaire de contact” connecté à un webhook avec des champs personnalisables (pour les sous-sélection surtout)

@@ -23,13 +23,22 @@ const { Content } = await post.render();
   <main class="container mx-auto px-4 py-8">
     <article class="prose prose-lg mx-auto max-w-4xl">
       <h1 class="text-4xl font-bold mb-4 text-main-color">{post.data.title}</h1>
-      <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-8 block">
+      <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-4 block">
         {post.data.pubDate.toLocaleDateString('fr-FR', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         })}
       </time>
+      {post.data.tags && (
+        <div class="flex flex-wrap gap-2 mb-8">
+          {post.data.tags.map((tag: string) => (
+            <a href={`/tag/${tag}`} class="bg-main-color-light text-main-color text-sm px-3 py-1 rounded-full hover:opacity-80 transition-opacity">
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
       {post.data.heroImage && (
         <img src={post.data.heroImage} alt={post.data.title} class="w-full h-auto rounded-lg shadow-lg mb-8" />
       )}
@@ -46,6 +55,9 @@ const { Content } = await post.render();
 <style define:vars={{ mainColor: siteConfig.mainColor }}>
   .text-main-color {
     color: var(--mainColor);
+  }
+  .bg-main-color-light {
+    background-color: color-mix(in srgb, var(--mainColor) 20%, white);
   }
   .prose {
     color: var(--text-color);

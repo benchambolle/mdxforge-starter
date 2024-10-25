@@ -63,31 +63,27 @@ const posts = (await getCollection('blog')).sort(
     <!-- Latest Blog Posts Section -->
     <section class="latest-posts mb-12">
       <h2 class="text-3xl font-semibold text-center mb-8 text-main-color">Derniers Articles</h2>
-      <ul class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <li class="bg-white shadow-md rounded-lg overflow-hidden">
-            <a href={`/blog/${post.slug}/`} class="flex flex-col md:flex-row hover:bg-gray-50 transition duration-300">
+          <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <a href={`/blog/${post.slug}/`} class="block hover:opacity-90 transition duration-300">
               {post.data.heroImage && (
-                <div class="md:w-1/4">
-                  <img 
-                    src={post.data.heroImage} 
-                    alt={post.data.title} 
-                    class="w-full h-48 md:h-full object-cover"
-                  />
-                </div>
+                <img 
+                  src={post.data.heroImage} 
+                  alt={post.data.title} 
+                  class="w-full h-48 object-cover"
+                />
               )}
-              <div class="p-4 flex flex-col justify-between">
-                <div>
-                  <h3 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h3>
-                  <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
-                    {post.data.pubDate.toLocaleDateString('fr-FR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
-                </div>
+              <div class="p-4">
+                <h3 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h3>
+                <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
+                  {post.data.pubDate.toLocaleDateString('fr-FR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
                 <div class="text-main-color font-semibold text-sm flex items-center">
                   Lire la suite 
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -96,14 +92,14 @@ const posts = (await getCollection('blog')).sort(
                 </div>
               </div>
             </a>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
 
     <!-- FAQ Section -->
     <section class="faq py-8">
-      <h2 class="text-3xl font-semibold mb-6 text-main-color">FAQ</h2>
+      <h2 class="text-3xl font-semibold mb-6 text-main-color text-center">FAQ</h2>
       <Accordion items={faqItems} />
     </section>
   </main>

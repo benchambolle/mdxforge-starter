@@ -34,6 +34,6 @@ Toutes les commandes sont exécutées depuis la racine du projet, dans un termin
 | `npm run astro ...`       | Exécute les commandes CLI comme `astro add`, `astro check` |
 | `npm run astro -- --help` | Obtient de l'aide sur l'utilisation de l'CLI Astro        |
 
-## 👀 Vous voulez en savoir plus ?
+## 👀 Vous voulez en savoir plus sur Astro ?
 
-N'hésitez pas à consulter [notre documentation](https://docs.astro.build) ou à rejoindre notre [serveur Discord](https://astro.build/chat).
+N'hésitez pas à consulter [la documentation officielle](https://docs.astro.build) ou à rejoindre le [serveur Discord Astro](https://astro.build/chat).

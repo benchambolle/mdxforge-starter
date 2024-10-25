@@ -4,49 +4,85 @@ import { siteConfig } from '../../config/siteconfig';
 import Newsletter from '../../components/Newsletter.astro';
 import NewsletterImg from '../../components/NewsletterImg.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import Accordion from '../../components/Accordion.astro';
 ---
 
 <Layout title="Modules MDXForge">
   <main class="container mx-auto px-4 py-16">
     <h1 class="text-5xl font-bold text-center mb-12 text-main-color">Modules MDXForge</h1>
     
-    <div class="prose prose-lg mx-auto">
-      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Newsletter</h2>
-      <p>Le module Newsletter permet d'ajouter un formulaire d'inscription à votre newsletter. Il inclut des champs pour le prénom, l'email, et une case RGPD obligatoire. Vous pouvez configurer un webhook pour recevoir les inscriptions.</p>
-      <pre class="bg-gray-100 p-4 rounded-lg">
-        <code>
-import Newsletter from '../../components/Newsletter.astro';
+    <div class="space-y-16">
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Newsletter</h2>
+        <p class="mb-4">Le module Newsletter permet d'ajouter un formulaire d'inscription à votre newsletter. Il inclut des champs pour le prénom, l'email, et une case RGPD obligatoire. Vous pouvez configurer un webhook pour recevoir les inscriptions.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <Newsletter webhook="https://votre-webhook.com" />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<Newsletter webhook="https://votre-webhook.com" />`}</code>
+        </p>
+      </section>
 
-<Newsletter webhook="https://votre-webhook.com" />
-        </code>
-      </pre>
-
-      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Newsletter avec Image</h2>
-      <p>Ce module est similaire au module Newsletter, mais inclut une image à gauche du formulaire. Idéal pour un design plus visuel.</p>
-      <pre class="bg-gray-100 p-4 rounded-lg">
-        <code>
-import NewsletterImg from '../../components/NewsletterImg.astro';
-
-<NewsletterImg 
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Newsletter avec Image</h2>
+        <p class="mb-4">Ce module est similaire au module Newsletter, mais inclut une image à gauche du formulaire. Idéal pour un design plus visuel.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <NewsletterImg 
+            webhook="https://votre-webhook.com"
+            image="/newsletter.jpg"
+            alt="Description de l'image"
+          />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<NewsletterImg 
   webhook="https://votre-webhook.com"
   image="/newsletter.jpg"
   alt="Description de l'image"
-/>
-        </code>
-      </pre>
+/>`}</code>
+        </p>
+      </section>
 
-      <h2 class="text-3xl font-semibold mt-8 mb-4">Module Formulaire de Contact</h2>
-      <p>Le module Formulaire de Contact permet aux utilisateurs de vous envoyer des messages directement depuis votre site. Il inclut des champs pour le nom, le prénom, l'entreprise, le téléphone, l'email, un menu déroulant pour le sujet, et un champ de message.</p>
-      <pre class="bg-gray-100 p-4 rounded-lg">
-        <code>
-import ContactForm from '../../components/ContactForm.astro';
-
-<ContactForm 
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Formulaire de Contact</h2>
+        <p class="mb-4">Le module Formulaire de Contact permet aux utilisateurs de vous envoyer des messages directement depuis votre site. Il inclut des champs pour le nom, le prénom, l'entreprise, le téléphone, l'email, un menu déroulant pour le sujet, et un champ de message.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <ContactForm 
+            webhook="https://votre-webhook.com"
+            subjects={['Demande d\'information', 'Support technique', 'Partenariat', 'Autre']}
+          />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<ContactForm 
   webhook="https://votre-webhook.com"
   subjects={['Demande d\'information', 'Support technique', 'Partenariat', 'Autre']}
-/>
-        </code>
-      </pre>
+/>`}</code>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Accordion</h2>
+        <p class="mb-4">Le module Accordion permet de créer des sections dépliables pour organiser du contenu de manière compacte. Il est idéal pour les FAQs ou pour présenter des informations de manière structurée.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <Accordion
+            items={[
+              { question: "Qu'est-ce que MDXForge ?", answer: "MDXForge est un template Astro en français, rapide et facile à configurer." },
+              { question: "Comment installer MDXForge ?", answer: "Vous pouvez installer MDXForge en clonant le repository GitHub et en suivant les instructions d'installation." }
+            ]}
+          />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<Accordion
+  items={[
+    { question: "Votre question", answer: "Votre réponse" },
+    { question: "Une autre question", answer: "Une autre réponse" }
+  ]}
+/>`}</code>
+        </p>
+      </section>
     </div>
   </main>
 </Layout>
