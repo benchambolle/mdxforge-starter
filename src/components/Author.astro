@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from '../config/siteconfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faXTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const { name, avatar, bio, twitter, instagram } = siteConfig.author;
 ---
@@ -17,8 +17,8 @@ const { name, avatar, bio, twitter, instagram } = siteConfig.author;
       <div class="flex space-x-4">
         {twitter && (
           <a href={twitter} target="_blank" rel="noopener noreferrer" class="text-main-color hover:opacity-80 transition-opacity">
-            <FontAwesomeIcon icon={faTwitter} className="w-6 h-6" />
-            <span class="sr-only">Twitter</span>
+            <FontAwesomeIcon icon={faXTwitter} className="w-6 h-6" />
+            <span class="sr-only">X (anciennement Twitter)</span>
           </a>
         )}
         {instagram && (

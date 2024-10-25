@@ -7,7 +7,7 @@ export const headerLinks = [
     text: 'Documentation', 
     children: [
       { text: 'Bien démarrer', href: '/documentation/demarrer-mdxforge' },
-      { text: 'Modules MDXForge', href: '/documentation/modules-mdxforge' }, // Ajout du lien
+      { text: 'Modules MDXForge', href: '/documentation/modules-mdxforge' },
     ]
   },
   { text: 'Contact', href: '/contact' },
@@ -29,7 +29,7 @@ export const footerLinks = [
 
 //Liens des réseaux sociaux
 export const socialLinks = [
-  { href: 'https://twitter.com/votrecompte', icon: 'twitter', label: 'Twitter' },
+  { href: 'https://x.com/votrecompte', icon: 'xTwitter', label: 'X (anciennement Twitter)' },
   { href: 'https://facebook.com/votrecompte', icon: 'facebook', label: 'Facebook' },
   { href: 'https://linkedin.com/company/votrecompte', icon: 'linkedin', label: 'LinkedIn' },
   { href: 'https://instagram.com/votrecompte', icon: 'instagram', label: 'Instagram' },

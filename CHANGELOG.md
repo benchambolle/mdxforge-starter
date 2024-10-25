@@ -5,11 +5,18 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2024-10-25
+
+### Modifié
+- remplacement de l'icone Twitter par X
+
+### Corrigé
+- bug des typographies qui s'affichaient mal sur les titres
 
 ## [1.2] - 2024-10-25
 
+### Ajouté
 - Ajout d'un module Accordion
-- Amélioration du design de la page d'accueil
 - Ajout du support des tags (affichage dans les cartes articles)
 - Ajout des tags clickables dans les articles et dans la page d'archive
 - Ajout d'une page tag pour lister les articles par tag 

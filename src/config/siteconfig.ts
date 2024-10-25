@@ -14,7 +14,7 @@ export const siteConfig = {
     name: "John Doe",
     avatar: "/author3.webp",
     bio: "Hello je suis l'auteur de ce blog",
-    twitter: "https://twitter.com/johndoe",
+    twitter: "https://x.com/johndoe",
     instagram: "https://instagram.com/johndoe",
   },
 };
