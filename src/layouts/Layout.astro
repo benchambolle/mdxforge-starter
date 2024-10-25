@@ -49,11 +49,13 @@ const { title = siteConfig.siteName, description = siteConfig.siteDescription } 
 <style define:vars={{ mainColor: siteConfig.mainColor, titleFont: siteConfig.titleFont, bodyFont: siteConfig.bodyFont }}>
 	:root {
 		--main-color: var(--mainColor);
+		--title-font: var(--titleFont);
+		--body-font: var(--bodyFont);
 	}
 	body {
-		font-family: var(--bodyFont), sans-serif;
+		font-family: var(--body-font), sans-serif;
 	}
 	h1, h2, h3, h4, h5, h6 {
-		font-family: var(--titleFont), sans-serif;
+		font-family: var(--title-font), sans-serif;
 	}
 </style>

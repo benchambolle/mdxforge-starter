@@ -8,8 +8,8 @@ export const siteConfig = {
   siteDescription: "Un template Astro en français, rapide et facile à configurer.",
   ogImage: "/MDXForge-og.jpg",
   // Polices Google pour les titres et le corps du texte
-  titleFont: "Roboto", // Remplacez par la police de votre choix pour les titres
-  bodyFont: "Open Sans", // Remplacez par la police de votre choix pour le corps du texte
+  titleFont: "Open Sans",
+  bodyFont: "Open Sans",
   author: {
     name: "John Doe",
     avatar: "/author3.webp",

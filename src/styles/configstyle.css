@@ -7,18 +7,16 @@
   --main-color-rgb: 52, 152, 219; /* Les valeurs RGB de votre couleur principale */
   --text-color: #333333;
   --background-color: #ffffff;
-  --title-font: 'Roboto', sans-serif; /* Utilisez la police définie dans siteConfig */
-  --body-font: 'Open Sans', sans-serif; /* Utilisez la police définie dans siteConfig */
 }
 
 body {
-  font-family: var(--body-font);
+  font-family: var(--body-font, 'Open Sans', sans-serif);
   background: var(--background-color);
   color: var(--text-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--title-font);
+  font-family: var(--title-font, 'Roboto', sans-serif);
   color: var(--main-color);
 }
 
