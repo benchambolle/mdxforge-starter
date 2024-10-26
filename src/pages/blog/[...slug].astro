@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/siteconfig';
 import Author from '../../components/Author.astro';
+import SimilarArticles from '../../components/SimilarArticles.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -49,6 +50,7 @@ const { Content } = await post.render();
     <div class="max-w-4xl mx-auto">
       <Author />
     </div>
+    <SimilarArticles currentSlug={post.slug} tags={post.data.tags} />
   </main>
 </Layout>
 
