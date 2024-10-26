@@ -5,6 +5,11 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2024-10-26
+
+### Ajouté
+- Ajout d'un composant SimilarArticles.astro pour les articles similaires
+
 ## [1.2.1] - 2024-10-25
 
 ### Modifié

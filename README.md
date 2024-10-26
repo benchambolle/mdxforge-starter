@@ -1,4 +1,4 @@
-# MDX Forge 1.2
+# MDX Forge 1.2.2
 
 Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à configurer.
 
@@ -9,8 +9,8 @@ Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à con
 ## Bien démarrer
 Vous trouverez les fichiers principaux dans le dossier src/config
 
-siteconfig.ts : configuration du site
-header-footer.ts : configuration de la navigation
+`siteconfig.ts` : configuration du site
+`header-footer.ts` : configuration de la navigation
 
 Vous pourrez configurer la navigation, vos informations générales, la bio de l'auteur, les polices de caractères, etc. dans ces deux fichiers.
 
@@ -26,7 +26,7 @@ Si elle est dans un sous dossier, utilisez le chemin /sous-dossier/image.jpg
 - astro mdx
 - astro sitemap
 - astro react
-- astro compress
+- astro compressor
 - astro robots.txt
 - astrojs/rss
 - fontawesome
