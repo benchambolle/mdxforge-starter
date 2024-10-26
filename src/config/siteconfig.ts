@@ -1,15 +1,15 @@
 //Configuration du site
 export const siteConfig = {
   siteName: "MDX Forge",
-  siteUrl: "https://votre-site.com", // Ajoutez l'URL de votre site ici
-  logoPath: "/logo.png", // Assurez-vous que ce chemin est correct
+  siteUrl: "https://demo.mdxforge.com", // Ajoutez l'URL de votre site ici : important pour la RSS et le sitemap !!!
+  logoPath: "/mdxforgev2.png", // Assurez-vous que ce chemin est correct
   faviconPath: "/favicon.png",
-  mainColor: "#38b6ff", // Assurez-vous que cette couleur convient pour un thème clair
+  mainColor: "#1B1B1B", // Assurez-vous que cette couleur convient pour un thème clair
   siteDescription: "Un template Astro en français, rapide et facile à configurer.",
-  ogImage: "/MDXForge-og.jpg",
+  ogImage: "/mdxforge-og2.jpg",
   // Polices Google pour les titres et le corps du texte
-  titleFont: "Open Sans",
-  bodyFont: "Open Sans",
+  titleFont: "Onest", // Assurez-vous que ce nom correspond exactement à celui de Google Fonts
+  bodyFont: "Inter", // Assurez-vous que ce nom correspond exactement à celui de Google Fonts
   author: {
     name: "John Doe",
     avatar: "/author3.webp",

@@ -21,6 +21,7 @@
   - `Header.astro` : en-tête du site
   - `Footer.astro` : pied de page
   - `Card.astro` : carte d'article
+  - `SimilarArticles.astro` : composant pour les articles similaires
 
 Lors de la création d'un nouveau composant, assurez-vous de le placer dans le dossier `src/components` et de l'importer dans le composant parent. Toujours créer un composant astro plutôt que TS.
 
@@ -40,6 +41,8 @@ Lors de la création d'un nouveau composant, assurez-vous de le placer dans le d
 ## Personnalisation
 - Adaptez les styles Tailwind CSS dans `tailwind.config.cjs`
 - Créez de nouveaux composants Astro pour des fonctionnalités spécifiques
+- Toujours penser à `configstyle.css` pour les styles globaux avant d'ajouter des styles dans des pages ou des composants
+- NE JAMAIS EFFACER LE CONTENU D'UNE PAGE SI LE PROMPT DEMANDE "AJOUTER CECI DANS TELLE PAGE"; NE JAMAIS CASSER LE DESIGN NON PLUS LORS D'UNE CORRECTION DE COMPOSANT OU DE PAGE
 
 ## Déploiement
 - Utilisez `npm run build` pour générer le site statique

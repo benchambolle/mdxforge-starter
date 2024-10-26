@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  posts: number;
+  color: 'light' | 'dark';
+}
+
+const { title, description, posts, color } = Astro.props;
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, posts);
+
+const cardClass = color === 'dark' 
+  ? 'bg-gray-800 text-white' 
+  : 'bg-white text-gray-800';
+
+const tagClass = color === 'dark'
+  ? 'bg-main-color bg-opacity-20 text-black'
+  : 'bg-main-color text-white';
+
+const dateClass = color === 'dark' ? 'text-white' : 'text-gray-800';
+const descriptionClass = color === 'dark' ? 'text-white' : 'text-gray-800';
+---
+
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-4 text-center text-main-color">{title}</h2>
+    <p class="text-lg mb-8 text-center text-body-color">{description}</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {recentPosts.map((post) => (
+        <article class={`rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 ${cardClass}`}>
+          <a href={`/blog/${post.slug}/`} class="block">
+            {post.data.heroImage && (
+              <Image
+                src={post.data.heroImage}
+                alt={post.data.title}
+                width={800}
+                height={400}
+                class="w-full h-48 object-cover"
+              />
+            )}
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
+              <time datetime={post.data.pubDate.toISOString()} class={`text-sm opacity-75 mb-2 block ${dateClass}`}>
+                {post.data.pubDate.toLocaleDateString('fr-FR', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              <p class={`text-sm mb-4 ${descriptionClass}`}>{post.data.description}</p>
+              {post.data.tags && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {post.data.tags.map((tag: string) => (
+                    <span class={`text-xs px-2 py-1 rounded-full ${tagClass}`}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div class="text-main-color font-semibold text-sm flex items-center">
+                Lire la suite 
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-main-color {
+    color: var(--main-color);
+  }
+  .bg-main-color {
+    background-color: var(--main-color);
+  }
+  .text-body-color {
+    color: var(--text-color);
+  }
+</style>

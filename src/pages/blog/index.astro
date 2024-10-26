@@ -9,50 +9,52 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <Layout title="Blog">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8 text-center text-main-color">Blog</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {posts.map((post) => (
-        <article class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-          <a href={`/blog/${post.slug}/`} class="block">
-            {post.data.heroImage && (
-              <div class="relative h-48 w-full">
-                <img 
-                  src={post.data.heroImage} 
-                  alt={post.data.title} 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            )}
-            <div class="p-6">
-              <h2 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h2>
-              <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
-                {post.data.pubDate.toLocaleDateString('fr-FR', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-              <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
-              {post.data.tags && (
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {post.data.tags.map((tag: string) => (
-                    <a href={`/tag/${tag}`} class="bg-main-color-light text-main-color text-xs px-2 py-1 rounded-full hover:opacity-80 transition-opacity">
-                      {tag}
-                    </a>
-                  ))}
+  <main>
+    <div class="content-container py-8">
+      <h1 class="text-4xl font-bold mb-8 text-center text-main-color">Blog</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <article class="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <a href={`/blog/${post.slug}/`} class="block">
+              {post.data.heroImage && (
+                <div class="relative h-48 w-full">
+                  <img 
+                    src={post.data.heroImage} 
+                    alt={post.data.title} 
+                    class="w-full h-full object-cover"
+                  />
                 </div>
               )}
-              <div class="text-main-color font-semibold text-sm flex items-center">
-                Lire la suite 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
+              <div class="p-6">
+                <h2 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h2>
+                <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
+                  {post.data.pubDate.toLocaleDateString('fr-FR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
+                {post.data.tags && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.data.tags.map((tag: string) => (
+                      <a href={`/tag/${tag}`} class="bg-main-color-light text-main-color text-xs px-2 py-1 rounded-full hover:opacity-80 transition-opacity">
+                        {tag}
+                      </a>
+                    ))}
+                  </div>
+                )}
+                <div class="text-main-color font-semibold text-sm flex items-center">
+                  Lire la suite 
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
               </div>
-            </div>
-          </a>
-        </article>
-      ))}
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
   </main>
 </Layout>

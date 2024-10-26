@@ -12,6 +12,11 @@ interface Props {
 }
 
 const { title = siteConfig.siteName, description = siteConfig.siteDescription } = Astro.props;
+
+// Fonction pour formater l'URL de la police Google
+function formatGoogleFontUrl(fontName: string) {
+  return fontName.replace(/ /g, '+') + ':wght@400;700;900';
+}
 ---
 
 <!doctype html>
@@ -23,7 +28,7 @@ const { title = siteConfig.siteName, description = siteConfig.siteDescription } 
 		<link rel="icon" type="image/svg+xml" href={siteConfig.faviconPath} />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="alternate" type="application/rss+xml" title={`RSS Feed for ${siteConfig.siteName}`} href="/rss.xml" />
-		<link href={`https://fonts.googleapis.com/css2?family=${siteConfig.titleFont.replace(' ', '+')}&family=${siteConfig.bodyFont.replace(' ', '+')}&display=swap`} rel="stylesheet">
+		<link href={`https://fonts.googleapis.com/css2?family=${formatGoogleFontUrl(siteConfig.titleFont)}&family=${formatGoogleFontUrl(siteConfig.bodyFont)}&display=swap`} rel="stylesheet">
 		<SEO
 			title={title}
 			description={description}
@@ -39,23 +44,32 @@ const { title = siteConfig.siteName, description = siteConfig.siteDescription } 
 	</head>
 	<body class="flex flex-col min-h-screen">
 		<Header />
-		<main class="flex-grow container mx-auto px-4 pt-8">
+		<main class="flex-grow">
 			<slot />
 		</main>
 		<Footer />
 	</body>
 </html>
 
-<style define:vars={{ mainColor: siteConfig.mainColor, titleFont: siteConfig.titleFont, bodyFont: siteConfig.bodyFont }}>
+<style is:global define:vars={{ mainColor: siteConfig.mainColor, titleFont: siteConfig.titleFont, bodyFont: siteConfig.bodyFont }}>
 	:root {
 		--main-color: var(--mainColor);
 		--title-font: var(--titleFont);
 		--body-font: var(--bodyFont);
 	}
 	body {
-		font-family: var(--body-font), sans-serif;
+		font-family: var(--body-font, sans-serif);
 	}
 	h1, h2, h3, h4, h5, h6 {
-		font-family: var(--title-font), sans-serif;
+		font-family: var(--title-font, sans-serif);
+	}
+	main {
+		margin-bottom: 0; /* Supprime la marge en bas de chaque page */
 	}
 </style>
+
+<script define:vars={{ mainColor: siteConfig.mainColor, titleFont: siteConfig.titleFont, bodyFont: siteConfig.bodyFont }}>
+  document.documentElement.style.setProperty('--main-color', mainColor);
+  document.documentElement.style.setProperty('--title-font', titleFont);
+  document.documentElement.style.setProperty('--body-font', bodyFont);
+</script>

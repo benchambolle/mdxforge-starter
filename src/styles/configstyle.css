@@ -3,25 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --main-color: #3498db; /* Votre couleur principale */
+  --main-color: #3498db; /* Cette valeur sera écrasée par celle de siteConfig */
   --main-color-rgb: 52, 152, 219; /* Les valeurs RGB de votre couleur principale */
   --text-color: #333333;
   --background-color: #ffffff;
 }
 
 body {
-  font-family: var(--body-font, 'Open Sans', sans-serif);
+  font-family: var(--body-font, sans-serif);
+  font-weight: 400; /* poids normal pour le texte du corps */
   background: var(--background-color);
   color: var(--text-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--title-font, 'Roboto', sans-serif);
+  font-family: var(--title-font, sans-serif);
+  font-weight: 700; /* ou 700 pour gras, 400 pour normal */
   color: var(--main-color);
 }
 
 a {
   color: var(--main-color);
+}
+
+/* Nouvelle classe utilitaire pour le contenu centré */
+.content-container {
+  width: 100%;
+  max-width: 1200px; /* Ajustez selon vos besoins */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Styles spécifiques pour le blog */
@@ -36,6 +48,7 @@ a {
 .blog-content h5,
 .blog-content h6 {
   color: var(--main-color);
+  font-weight: 700;
 }
 
 .blog-content a {
@@ -50,6 +63,13 @@ a {
 
 .bg-main-color {
   background-color: var(--main-color);
+}
+
+.full-width-container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ... autres styles ... */

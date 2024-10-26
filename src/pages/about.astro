@@ -4,74 +4,76 @@ import { siteConfig } from '../config/siteconfig';
 ---
 
 <Layout title="À propos de MDXForge">
-	<main class="container mx-auto px-4 py-16">
-		<h1 class="text-5xl font-bold text-center mb-12 text-main-color">MDXForge : Simplifiez votre présence web</h1>
-		
-		<p class="text-xl text-center mb-16">
-			MDXForge est un template Astro minimaliste, en français et open source, conçu pour révolutionner la création de sites web statiques et de blogs simples. Notre mission ? Offrir une alternative puissante et flexible à WordPress pour les projets qui privilégient la performance et la simplicité.
-		</p>
+	<main>
+		<div class="content-container py-16">
+			<h1 class="text-5xl font-bold text-center mb-12 text-main-color">MDXForge : Simplifiez votre présence web</h1>
+			
+			<p class="text-xl text-center mb-16">
+				MDXForge est un template Astro minimaliste, en français et open source, conçu pour révolutionner la création de sites web statiques et de blogs simples. Notre mission ? Offrir une alternative puissante et flexible à WordPress pour les projets qui privilégient la performance et la simplicité.
+			</p>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-			<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
-				<h2 class="text-2xl font-semibold mb-6 text-main-color">Pourquoi MDXForge ?</h2>
-				<ul class="space-y-4">
-					<li>✅ Template Astro prêt à l'emploi</li>
-					<li>✅ 100% en français</li>
-					<li>✅ Open source et personnalisable</li>
-					<li>✅ Performances optimales</li>
-					<li>✅ SEO-friendly dès le départ</li>
-				</ul>
-			</div>
-			<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
-				<h2 class="text-2xl font-semibold mb-6 text-main-color">Fonctionnalités clés</h2>
-				<ul class="space-y-4">
-					<li>✅ Support MDX intégré</li>
-					<li>✅ Composants réutilisables</li>
-					<li>✅ Styles Tailwind pré-configurés</li>
-					<li>✅ Déploiement facile</li>
-					<li>✅ Extensible selon vos besoins</li>
-				</ul>
-			</div>
-		</div>
-
-		<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Fonctionnalités avancées</h2>
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-			{[
-				{ title: 'Sitemap XML', description: 'Génération automatique du sitemap pour une meilleure indexation' },
-				{ title: 'Flux RSS', description: 'Flux RSS intégré pour fidéliser vos lecteurs' },
-				{ title: 'SEO optimisé', description: 'Balises meta et structure optimisées pour les moteurs de recherche' },
-				{ title: 'Configuration facile', description: 'Fichiers de configuration centralisés pour une personnalisation rapide' },
-				{ title: 'Tailwind CSS', description: 'Framework CSS utilitaire pour un design rapide et flexible' },
-				{ title: 'Support React', description: 'Intégration de composants React pour plus de dynamisme' },
-				{ title: 'Robots.txt', description: 'Fichier robots.txt automatiquement généré et configurable' },
-				{ title: 'Performance', description: 'Optimisations de performance intégrées pour des temps de chargement rapides' },
-				{ title: 'Accessibilité', description: 'Bonnes pratiques d\'accessibilité intégrées dès le départ' },
-			].map((feature) => (
-				<div class="bg-main-color-light p-6 rounded-lg shadow-lg">
-					<h3 class="text-xl font-semibold mb-4 text-main-color">{feature.title}</h3>
-					<p>{feature.description}</p>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+				<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
+					<h2 class="text-2xl font-semibold mb-6 text-main-color">Pourquoi MDXForge ?</h2>
+					<ul class="space-y-4">
+						<li>✅ Template Astro prêt à l'emploi</li>
+						<li>✅ 100% en français</li>
+						<li>✅ Open source et personnalisable</li>
+						<li>✅ Performances optimales</li>
+						<li>✅ SEO-friendly dès le départ</li>
+					</ul>
 				</div>
-			))}
-		</div>
+				<div class="bg-main-color-light p-8 rounded-lg shadow-lg">
+					<h2 class="text-2xl font-semibold mb-6 text-main-color">Fonctionnalités clés</h2>
+					<ul class="space-y-4">
+						<li>✅ Support MDX intégré</li>
+						<li>✅ Composants réutilisables</li>
+						<li>✅ Styles Tailwind pré-configurés</li>
+						<li>✅ Déploiement facile</li>
+						<li>✅ Extensible selon vos besoins</li>
+					</ul>
+				</div>
+			</div>
 
-		<div class="bg-main-color-light p-8 rounded-lg shadow-lg mb-24">
-			<h2 class="text-3xl font-semibold mb-6 text-main-color">Notre vision</h2>
-			<p class="mb-6">
-				MDXForge naît d'une volonté de démocratiser la création de sites web performants et modernes. En combinant la puissance d'Astro, la flexibilité de MDX et une approche centrée sur l'utilisateur, nous offrons une solution qui s'adresse aussi bien aux développeurs qu'aux créateurs de contenu.
-			</p>
-			<p>
-				Notre objectif est de fournir un point de départ solide pour vos projets web, en intégrant les meilleures pratiques et les outils les plus performants du marché, tout en restant simple d'utilisation et hautement personnalisable.
-			</p>
-		</div>
+			<h2 class="text-3xl font-semibold text-center mb-12 text-main-color">Fonctionnalités avancées</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+				{[
+					{ title: 'Sitemap XML', description: 'Génération automatique du sitemap pour une meilleure indexation' },
+					{ title: 'Flux RSS', description: 'Flux RSS intégré pour fidéliser vos lecteurs' },
+					{ title: 'SEO optimisé', description: 'Balises meta et structure optimisées pour les moteurs de recherche' },
+					{ title: 'Configuration facile', description: 'Fichiers de configuration centralisés pour une personnalisation rapide' },
+					{ title: 'Tailwind CSS', description: 'Framework CSS utilitaire pour un design rapide et flexible' },
+					{ title: 'Support React', description: 'Intégration de composants React pour plus de dynamisme' },
+					{ title: 'Robots.txt', description: 'Fichier robots.txt automatiquement généré et configurable' },
+					{ title: 'Performance', description: 'Optimisations de performance intégrées pour des temps de chargement rapides' },
+					{ title: 'Accessibilité', description: 'Bonnes pratiques d\'accessibilité intégrées dès le départ' },
+				].map((feature) => (
+					<div class="bg-main-color-light p-6 rounded-lg shadow-lg">
+						<h3 class="text-xl font-semibold mb-4 text-main-color">{feature.title}</h3>
+						<p>{feature.description}</p>
+					</div>
+				))}
+			</div>
 
-		<div class="text-center">
-			<h2 class="text-3xl font-semibold mb-8 text-main-color">Contribuez à l'aventure</h2>
-			<p class="mb-8">
-				MDXForge est plus qu'un simple template, c'est une communauté. Nous croyons en la force de l'open source et invitons les développeurs, designers et enthousiastes à contribuer à notre projet. Ensemble, construisons l'avenir du web statique !
-			</p>
-			<a href="https://github.com/votre-repo/mdxforge" class="inline-block bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
-				Découvrez MDXForge sur GitHub
-			</a>
+			<div class="bg-main-color-light p-8 rounded-lg shadow-lg mb-24">
+				<h2 class="text-3xl font-semibold mb-6 text-main-color">Notre vision</h2>
+				<p class="mb-6">
+					MDXForge naît d'une volonté de démocratiser la création de sites web performants et modernes. En combinant la puissance d'Astro, la flexibilité de MDX et une approche centrée sur l'utilisateur, nous offrons une solution qui s'adresse aussi bien aux développeurs qu'aux créateurs de contenu.
+				</p>
+				<p>
+					Notre objectif est de fournir un point de départ solide pour vos projets web, en intégrant les meilleures pratiques et les outils les plus performants du marché, tout en restant simple d'utilisation et hautement personnalisable.
+				</p>
+			</div>
+
+			<div class="text-center">
+				<h2 class="text-3xl font-semibold mb-8 text-main-color">Contribuez à l'aventure</h2>
+				<p class="mb-8">
+					MDXForge est plus qu'un simple template, c'est une communauté. Nous croyons en la force de l'open source et invitons les développeurs, designers et enthousiastes à contribuer à notre projet. Ensemble, construisons l'avenir du web statique !
+				</p>
+				<a href="https://github.com/votre-repo/mdxforge" class="inline-block bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
+					Découvrez MDXForge sur GitHub
+				</a>
+			</div>
 		</div>
 	</main>
 </Layout>

@@ -4,7 +4,7 @@ import { siteConfig } from '../config/siteconfig';
 import BurgerMenu from './BurgerMenu.astro';
 ---
 
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md relative z-50">
   <div class="container mx-auto px-4 py-3 flex justify-between items-center">
     <a href="/" class="text-xl font-bold flex items-center">
       {siteConfig.logoPath ? (
@@ -20,13 +20,13 @@ import BurgerMenu from './BurgerMenu.astro';
             <li class="relative group">
               {item.children ? (
                 <div>
-                  <button class="text-gray-600 hover:text-main-color transition duration-300 flex items-center peer">
+                  <button class="text-gray-600 hover:text-main-color transition duration-300 flex items-center">
                     {item.text}
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                   </button>
-                  <ul class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden peer-focus:block hover:block focus:block">
+                  <ul class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden group-hover:block z-50">
                     {item.children.map((subItem) => (
                       <li>
                         <a href={subItem.href} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-main-color transition duration-300">{subItem.text}</a>
@@ -59,21 +59,29 @@ import BurgerMenu from './BurgerMenu.astro';
 </style>
 
 <script>
-  document.addEventListener('click', (event) => {
-    const dropdowns = document.querySelectorAll('.peer-focus:block');
-    dropdowns.forEach((dropdown) => {
-      if (!dropdown.contains(event.target as Node)) {
-        dropdown.classList.add('hidden');
-      }
-    });
-  });
+  document.addEventListener('astro:page-load', () => {
+    const dropdownButtons = document.querySelectorAll('.group > div > button');
+    dropdownButtons.forEach((button) => {
+      const dropdown = button.nextElementSibling as HTMLElement;
+      let isOpen = false;
 
-  const dropdownButtons = document.querySelectorAll('.peer');
-  dropdownButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const dropdown = button.nextElementSibling;
-      dropdown?.classList.toggle('hidden');
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isOpen = !isOpen;
+        dropdown.style.display = isOpen ? 'block' : 'none';
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!button.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+          isOpen = false;
+          dropdown.style.display = 'none';
+        }
+      });
+
+      // Prevent closing when clicking inside the dropdown
+      dropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     });
   });
 </script>
