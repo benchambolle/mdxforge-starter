@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   currentSlug: string;
@@ -12,10 +13,10 @@ const { currentSlug, tags } = Astro.props;
 const allPosts = await getCollection('blog');
 
 const similarPosts = allPosts
-  .filter(post => post.slug !== currentSlug && post.data.tags.some(tag => tags.includes(tag)))
+  .filter((post) => post.slug !== currentSlug && post.data.tags.some((tag: string) => tags.includes(tag)))
   .sort((a, b) => {
-    const aCommonTags = a.data.tags.filter(tag => tags.includes(tag)).length;
-    const bCommonTags = b.data.tags.filter(tag => tags.includes(tag)).length;
+    const aCommonTags = a.data.tags.filter((tag: string) => tags.includes(tag)).length;
+    const bCommonTags = b.data.tags.filter((tag: string) => tags.includes(tag)).length;
     return bCommonTags - aCommonTags;
   })
   .slice(0, 3);
@@ -25,7 +26,7 @@ const similarPosts = allPosts
   <section class="similar-articles mt-12">
     <h2 class="text-3xl font-semibold text-center mb-8 text-main-color">Vous pourriez aimer</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {similarPosts.map((post) => (
+      {similarPosts.map((post: CollectionEntry<"blog">) => (
         <article class="bg-white shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
           <a href={`/blog/${post.slug}/`} class="block">
             {post.data.heroImage && (
