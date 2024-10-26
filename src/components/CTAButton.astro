@@ -1,28 +1,26 @@
 ---
-import { siteConfig } from '../config/siteconfig';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
   href: string;
   text: string;
-  variant?: 'primary' | 'secondary' | 'third';
+  variant: 'primary' | 'secondary';
   className?: string;
   icon?: IconDefinition;
   iconPosition?: 'left' | 'right';
 }
 
-const { href, text, variant = 'primary', className = '', icon, iconPosition = 'left' } = Astro.props;
+const { href, text, variant, className = '', icon, iconPosition = 'left' } = Astro.props;
 
 const baseClasses = "font-bold py-2 px-6 rounded-lg transition-all duration-300 text-sm sm:text-base inline-flex items-center cursor-pointer";
 const variantClasses = {
-  primary: "bg-main-color text-white hover:bg-white hover:text-main-color border-2 border-transparent hover:border-main-color",
+  primary: "bg-main-color text-white hover:bg-white hover:text-main-color border-2 border-main-color",
   secondary: "bg-white text-main-color hover:bg-main-color hover:text-white border-2 border-main-color",
-  third: "bg-transparent text-main-color border-2 border-main-color hover:bg-main-color hover:text-white"
 };
 ---
 
-<a href={href} class={`${baseClasses} ${variantClasses[variant]} ${className}`}>
+<a href={href} class={`cta-button ${baseClasses} ${variantClasses[variant]} ${className}`}>
   {icon && iconPosition === 'left' && (
     <FontAwesomeIcon icon={icon} className={`w-4 h-4 ${text ? 'mr-2' : ''}`} />
   )}
@@ -33,28 +31,22 @@ const variantClasses = {
 </a>
 
 <style>
-  a {
-    --main-color: var(--mainColor);
-  }
-  .bg-main-color {
+  .cta-button.primary {
     background-color: var(--main-color);
+    color: white;
+    border: 2px solid var(--main-color);
   }
-  .text-main-color {
+  .cta-button.primary:hover {
+    background-color: white;
     color: var(--main-color);
   }
-  .hover\:bg-main-color:hover {
-    background-color: var(--main-color);
-  }
-  .hover\:text-main-color:hover {
+  .cta-button.secondary {
+    background-color: white;
     color: var(--main-color);
+    border: 2px solid var(--main-color);
   }
-  .hover\:border-main-color:hover {
-    border-color: var(--main-color);
-  }
-  .border-main-color {
-    border-color: var(--main-color);
-  }
-  a:hover {
-    text-decoration: none;
+  .cta-button.secondary:hover {
+    background-color: var(--main-color);
+    color: white;
   }
 </style>
