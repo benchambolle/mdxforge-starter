@@ -6,6 +6,7 @@ import { siteConfig } from '../../config/siteconfig';
 import Author from '../../components/Author.astro';
 import SimilarArticles from '../../components/SimilarArticles.astro';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import ReadingProgress from '../../components/ReadingProgress.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -32,24 +33,25 @@ const readingTime = getReadingTime(post.body);
 ---
 
 <Layout title={`${post.data.title} | ${siteConfig.siteName}`}>
+  <ReadingProgress />
   <main class="container mx-auto px-4 py-8">
     <div class="max-w-4xl mx-auto py-4">
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  </div>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
     <article class="prose prose-lg mx-auto max-w-4xl">
       <h1 class="text-4xl font-bold mb-4 text-main-color">{post.data.title}</h1>
       <div class="flex items-center text-sm text-gray-500 mb-4">
