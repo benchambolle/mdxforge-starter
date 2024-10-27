@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { siteConfig } from '../config/siteconfig';
+import CTAButton from '../components/CTAButton.astro';
 ---
 
 <Layout title="À propos de MDXForge">
@@ -70,9 +71,13 @@ import { siteConfig } from '../config/siteconfig';
 				<p class="mb-8">
 					MDXForge est plus qu'un simple template, c'est une communauté. Nous croyons en la force de l'open source et invitons les développeurs, designers et enthousiastes à contribuer à notre projet. Ensemble, construisons l'avenir du web statique !
 				</p>
-				<a href="https://github.com/votre-repo/mdxforge" class="inline-block bg-main-color text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity">
-					Découvrez MDXForge sur GitHub
-				</a>
+                <div class="flex justify-center py-4">
+                    <CTAButton
+                      text="Commencer"
+                      href="https://github.com/benchambolle/mdxforge-starter"
+                      variant="dark"
+                    />
+                    </div>
 			</div>
 		</div>
 	</main>

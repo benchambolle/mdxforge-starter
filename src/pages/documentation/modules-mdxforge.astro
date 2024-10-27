@@ -5,13 +5,15 @@ import Newsletter from '../../components/Newsletter.astro';
 import NewsletterImg from '../../components/NewsletterImg.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Accordion from '../../components/Accordion.astro';
+import ImageGallery from '../../components/ImageGallery.astro';
+import PricingCompare from '../../components/PricingCompare.astro';
 ---
 
 <Layout title="Modules MDXForge">
   <main class="container mx-auto px-4 py-16">
     <h1 class="text-5xl font-bold text-center mb-12 text-main-color">Modules MDXForge</h1>
     
-    <div class="space-y-16">
+    <div class="space-y-16 content-container">
       <section>
         <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Newsletter</h2>
         <p class="mb-4">Le module Newsletter permet d'ajouter un formulaire d'inscription à votre newsletter. Il inclut des champs pour le prénom, l'email, et une case RGPD obligatoire. Vous pouvez configurer un webhook pour recevoir les inscriptions.</p>
@@ -81,6 +83,101 @@ import Accordion from '../../components/Accordion.astro';
     { question: "Une autre question", answer: "Une autre réponse" }
   ]}
 />`}</code>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module Galerie d'Images avec Lightbox</h2>
+        <p class="mb-4">Le module Galerie d'Images permet d'afficher une collection d'images dans une grille cliquable. Lorsqu'une image est cliquée, elle s'ouvre dans un lightbox avec la possibilité de naviguer entre les images.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <ImageGallery
+            images={[
+              { src: "/MDXForge-og.jpg", alt: "Description de l'image 1", title: "Titre de l'image 1" },
+              { src: "/mdxforge-og2.jpg", alt: "Description de l'image 2", title: "Titre de l'image 2" },
+              { src: "/newsletter.jpg", alt: "Description de l'image 3", title: "Titre de l'image 3" },
+            ]}
+          />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<ImageGallery
+  images={[
+    { src: "/image1.jpg", alt: "Description de l'image 1", title: "Titre de l'image 1" },
+    { src: "/image2.jpg", alt: "Description de l'image 2", title: "Titre de l'image 2" },
+    { src: "/image3.jpg", alt: "Description de l'image 3", title: "Titre de l'image 3" },
+  ]}
+/>`}</code>
+        </p>
+        <p class="mt-4">
+          Ce composant crée une grille d'images cliquables. Lorsqu'une image est cliquée, elle s'ouvre dans un lightbox plein écran. Les utilisateurs peuvent naviguer entre les images en utilisant les flèches sur les côtés ou en cliquant sur les images suivantes/précédentes. Le lightbox affiche également le titre de l'image (s'il est fourni) sous l'image.
+        </p>
+        <p class="mt-2">
+          Pour utiliser ce composant, assurez-vous d'avoir les images dans votre dossier public et fournissez un tableau d'objets image avec les propriétés src, alt, et title (optionnel) pour chaque image que vous souhaitez afficher dans la galerie.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-3xl font-semibold mt-8 mb-4 text-main-color">Module de Comparaison des Prix</h2>
+        <p class="mb-4">Le module de Comparaison des Prix permet d'afficher une grille responsive de plans tarifaires, avec une version claire et une version sombre.</p>
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+          <PricingCompare
+            plans={[
+              {
+                name: "Plan Standard",
+                price: "9,99 €",
+                period: "par mois",
+                cta: {
+                  text: "Commencer gratuitement",
+                  action: "#"
+                },
+                features: [
+                  "Fonctionnalité 1",
+                  "Fonctionnalité 2",
+                  "Fonctionnalité 3"
+                ]
+              },
+              {
+                name: "Plan Pro",
+                price: "19,99 €",
+                period: "par mois",
+                cta: {
+                  text: "Acheter maintenant",
+                  action: "#"
+                },
+                features: [
+                  "Tout du plan Standard",
+                  "Fonctionnalité Pro 1",
+                  "Fonctionnalité Pro 2"
+                ]
+              }
+            ]}
+          />
+        </div>
+        <p class="text-sm text-gray-600">Pour utiliser ce module :</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-2">
+          <code>{`<PricingCompare
+  plans={[
+    {
+      name: "Nom du plan",
+      price: "Prix",
+      period: "Période",
+      cta: {
+        text: "Texte du bouton",
+        action: "URL ou action"
+      },
+      features: [
+        "Fonctionnalité 1",
+        "Fonctionnalité 2",
+        "Fonctionnalité 3"
+      ]
+    },
+    // ... autres plans
+  ]}
+  darkMode={false} // Optionnel, par défaut false
+/>`}</code>
+        </p>
+        <p class="mt-4">
+          Ce composant crée une grille responsive de plans de tarification. Vous pouvez spécifier autant de plans que nécessaire, et chaque plan peut avoir son propre ensemble de fonctionnalités. L'option <code>darkMode</code> permet de basculer entre les versions claire et sombre du composant.
         </p>
       </section>
     </div>

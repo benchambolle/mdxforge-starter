@@ -1,4 +1,4 @@
-# MDX Forge 1.2.2
+# MDX Forge 1.3
 
 Bienvenue sur MDX Forge, un template Astro en français, rapide et facile à configurer.
 
@@ -29,6 +29,7 @@ Si elle est dans un sous dossier, utilisez le chemin /sous-dossier/image.jpg
 - astro compressor
 - astro robots.txt
 - astrojs/rss
+- shadcn/ui
 - fontawesome
 
 ## 🧞 Commandes

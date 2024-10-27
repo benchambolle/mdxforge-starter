@@ -5,6 +5,17 @@ Toutes les modifications notables apportées à ce projet seront documentées da
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3] - 2024-10-27
+
+### Ajouté
+- Composant HeroSectionImg.astro
+- Composant PricingCompare.astro
+- Composants Features.astro
+- Composant CTAButton.astro
+- Composant BlogMiniGrid.astro
+- Composant ImageGallery.astro
+- ShadCN/UI pour les composants
+
 ## [1.2.2] - 2024-10-26
 
 ### Ajouté

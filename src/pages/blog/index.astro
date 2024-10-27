@@ -2,15 +2,35 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/siteconfig';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Fonction pour calculer le temps de lecture
+function getReadingTime(content: string) {
+  const wordsPerMinute = 200;
+  const numberOfWords = content.split(/\s/g).length;
+  const minutes = numberOfWords / wordsPerMinute;
+  return Math.max(2, Math.ceil(minutes));
+}
 ---
 
 <Layout title="Blog">
   <main>
     <div class="content-container py-8">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Blog</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <h1 class="text-4xl font-bold mb-8 text-center text-main-color">Blog</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
@@ -27,13 +47,17 @@ const posts = (await getCollection('blog')).sort(
               )}
               <div class="p-6">
                 <h2 class="text-xl font-semibold mb-2 text-main-color">{post.data.title}</h2>
-                <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-2 block">
-                  {post.data.pubDate.toLocaleDateString('fr-FR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
+                <div class="flex items-center text-sm text-gray-500 mb-2">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('fr-FR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <span class="mx-2">•</span>
+                  <span>{getReadingTime(post.body)} min de lecture</span>
+                </div>
                 <p class="text-gray-700 text-sm mb-4">{post.data.description}</p>
                 {post.data.tags && (
                   <div class="flex flex-wrap gap-2 mb-4">

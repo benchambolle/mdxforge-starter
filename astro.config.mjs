@@ -36,5 +36,12 @@ export default defineConfig({
       theme: 'dracula',
       wrap: true
     }
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
+    }
   }
 });

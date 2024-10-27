@@ -1,0 +1,102 @@
+---
+interface PricingPlan {
+  name: string;
+  price: string;
+  period: string;
+  cta: {
+    text: string;
+    action: string;
+  };
+  features: string[];
+}
+
+interface Props {
+  plans: PricingPlan[];
+  darkMode?: boolean;
+}
+
+const { plans, darkMode = false } = Astro.props;
+---
+
+<div class={`pricing-compare ${darkMode ? 'dark' : ''}`}>
+  <h2 class="text-3xl font-bold mb-8 text-center">Compare plans</h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    {plans.map((plan) => (
+      <div class="plan p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold mb-2">{plan.name}</h3>
+        <div class="price-container mb-4">
+          <span class="text-3xl font-bold">{plan.price}</span>
+          <span class="text-sm">{plan.period}</span>
+        </div>
+        <button class="cta-button w-full py-2 px-4 rounded-md mb-6">
+          {plan.cta.text}
+        </button>
+        <ul class="features space-y-2">
+          {plan.features.map((feature) => (
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 check-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .pricing-compare {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .plan {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  .cta-button {
+    background-color: var(--main-color);
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: color-mix(in srgb, var(--main-color) 80%, black);
+  }
+
+  .check-icon {
+    color: var(--main-color);
+  }
+
+  .pricing-compare.dark {
+    background-color: transparent;
+    color: var(--background-color);
+  }
+
+  .pricing-compare.dark h2 {
+    color: var(--background-color);
+  }
+
+  .pricing-compare.dark .plan {
+    background-color: color-mix(in srgb, var(--text-color) 90%, var(--background-color));
+    color: var(--background-color);
+  }
+
+  .pricing-compare.dark .cta-button {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  .pricing-compare.dark .cta-button:hover {
+    background-color: color-mix(in srgb, var(--background-color) 80%, var(--main-color));
+  }
+
+  .pricing-compare.dark .check-icon {
+    color: var(--main-color);
+  }
+</style>

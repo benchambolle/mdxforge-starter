@@ -5,10 +5,11 @@ import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/siteconfig';
 import Author from '../../components/Author.astro';
 import SimilarArticles from '../../components/SimilarArticles.astro';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  return posts.map((post: any) => ({
     params: { slug: post.slug },
     props: post,
   }));
@@ -18,19 +19,50 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
+
+// Fonction pour calculer le temps de lecture
+function getReadingTime(content: string) {
+  const wordsPerMinute = 200;
+  const numberOfWords = content.split(/\s/g).length;
+  const minutes = numberOfWords / wordsPerMinute;
+  return Math.max(2, Math.ceil(minutes));
+}
+
+const readingTime = getReadingTime(post.body);
 ---
 
 <Layout title={`${post.data.title} | ${siteConfig.siteName}`}>
   <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto py-4">
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  </div>
     <article class="prose prose-lg mx-auto max-w-4xl">
       <h1 class="text-4xl font-bold mb-4 text-main-color">{post.data.title}</h1>
-      <time datetime={post.data.pubDate.toISOString()} class="text-sm text-gray-500 mb-4 block">
-        {post.data.pubDate.toLocaleDateString('fr-FR', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-      </time>
+      <div class="flex items-center text-sm text-gray-500 mb-4">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {post.data.pubDate.toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+        <span class="mx-2">•</span>
+        <span>{readingTime} min de lecture</span>
+      </div>
       {post.data.tags && (
         <div class="flex flex-wrap gap-2 mb-8">
           {post.data.tags.map((tag: string) => (
